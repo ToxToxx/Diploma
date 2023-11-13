@@ -1,14 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealthModel
 {
-    private float _currentHealth;
-    private float _maxHealth;
+    private int _currentHealth;
+    private int _maxHealth;
 
-    public float Health
+    public int MaxHealth
+    {
+        get { return _maxHealth; }
+    }
+
+    public int Health
     {
         get { return _currentHealth; }
         set
@@ -16,16 +19,16 @@ public class PlayerHealthModel
             _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
             OnHealthChanged?.Invoke(_currentHealth);
 
-            if (_currentHealth < 0)
+            if (_currentHealth <= 0)
             {
                 Die();
             }
         }
     }
 
-    public event Action<float> OnHealthChanged;
+    public event Action<int> OnHealthChanged;
 
-    public PlayerHealthModel(float maxHealth)
+    public PlayerHealthModel(int maxHealth)
     {
         _maxHealth = maxHealth;
         Health = maxHealth;
@@ -33,7 +36,6 @@ public class PlayerHealthModel
 
     private void Die()
     {
-
+        // Действия при смерти
     }
-
 }
