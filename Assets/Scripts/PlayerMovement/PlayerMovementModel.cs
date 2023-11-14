@@ -7,7 +7,7 @@ public class PlayerMovementModel
 {
     private float _actualSpeed;
     private float _speed;
-    private float _jumpForce = 5f;
+    private float _jumpForce = 50f;
 
     public float ActualSpeed { get { return _actualSpeed; } }
     public float JumpForce { get { return _jumpForce; } }

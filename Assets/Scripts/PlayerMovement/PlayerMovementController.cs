@@ -8,6 +8,7 @@ public class PlayerMovementController : IDisposable
 
     private PlayerMovementModel _playerMovementModel;
     private PlayerInputAction _playerInputAction;
+    public event EventHandler OnPlayersJump;
 
     [Inject]
     public void Construct(PlayerMovementModel playerMovementModel)
@@ -15,9 +16,16 @@ public class PlayerMovementController : IDisposable
         _playerMovementModel = playerMovementModel;
         _playerInputAction = new PlayerInputAction();
         _playerInputAction.Player.Move.performed += OnMovePerformed;
+        _playerInputAction.Player.Jump.performed += OnJumpPerformed;
         _playerInputAction.Player.Enable();
 
     }
+
+    private void OnJumpPerformed(InputAction.CallbackContext obj)
+    {
+        OnPlayersJump?.Invoke(this, EventArgs.Empty);
+    }
+
     public void Dispose()
     {
         _playerInputAction.Dispose();
@@ -39,15 +47,12 @@ public class PlayerMovementController : IDisposable
     {
         float moveSpeed = _playerMovementModel.Speed;
         Vector2 inputVector = GetMovementVectorNormalized();
-        Vector3 moveDir = new(inputVector.x * moveSpeed, 0f, 0f);
+        Vector3 moveDir = new(inputVector.x * moveSpeed, inputVector.y, 0f);
         return moveDir;
     }
-
-    public Vector3 GetMovementVectorJump()
+    
+    public float GetJumpForce()
     {
-        float jumpForce = _playerMovementModel.JumpForce;
-        Vector2 inputVector = GetMovementVectorNormalized();
-        Vector3 jumpDIr = new(0f, inputVector.y * jumpForce, 0f);
-        return jumpDIr;
+        return _playerMovementModel.JumpForce;
     }
 }

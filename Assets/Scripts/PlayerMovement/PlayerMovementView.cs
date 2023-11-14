@@ -9,12 +9,18 @@ public class PlayerMovementView : MonoBehaviour
 {
     private PlayerMovementController _playerMovementController;
     private Rigidbody2D _playerRigidbody;
-    private bool _isJumping;
+    [SerializeField] private bool _isJumping;
 
     [Inject]
     public void Construct(PlayerMovementController controller)
     {
         _playerMovementController = controller;
+        _playerMovementController.OnPlayersJump += OnPlayersJump;
+    }
+
+    private void OnPlayersJump(object sender, System.EventArgs e)
+    {
+        Jump();
     }
 
     private void Awake()
@@ -23,22 +29,21 @@ public class PlayerMovementView : MonoBehaviour
         _isJumping = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
-        Jump();
     }
 
     public void Move()
     {
-        transform.Translate(_playerMovementController.GetMovementVectorMoveSpeed() * Time.deltaTime);
+        _playerRigidbody.velocity = new Vector2(_playerMovementController.GetMovementVectorMoveSpeed().x, _playerRigidbody.velocity.y);
     }
 
     public void Jump()
     {
         if(!_isJumping)
         {
-            _playerRigidbody.AddForce(_playerMovementController.GetMovementVectorJump(), ForceMode2D.Impulse);
+            _playerRigidbody.AddForce(Vector3.up * _playerMovementController.GetJumpForce(), ForceMode2D.Impulse);
             _isJumping = true;
         }
     }
@@ -47,6 +52,4 @@ public class PlayerMovementView : MonoBehaviour
     {
         _isJumping = false;
     }
-
-
 }
