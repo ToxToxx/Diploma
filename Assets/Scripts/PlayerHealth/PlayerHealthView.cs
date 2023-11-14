@@ -16,11 +16,6 @@ public class PlayerHealthView : MonoBehaviour
         _healthController.OnHealthDecreased += UpdateHealthUI;
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void UpdateHealthUI(int health)
     {
         Debug.Log(health);
