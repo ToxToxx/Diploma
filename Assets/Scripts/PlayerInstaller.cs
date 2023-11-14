@@ -18,7 +18,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayerMovement()
     {
-        Container.Bind<PlayerMovementModel>().AsSingle().WithArguments<float>(1f).NonLazy();
+        Container.Bind<PlayerMovementModel>().AsSingle().WithArguments<float>(3f).NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle().NonLazy();
         Container.Bind<PlayerMovementView>().FromComponentInHierarchy().AsSingle();
     }

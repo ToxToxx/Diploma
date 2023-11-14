@@ -1,5 +1,4 @@
 using UnityEngine;
-
 using Zenject;
 using System;
 using UnityEngine.InputSystem;
@@ -29,19 +28,26 @@ public class PlayerMovementController : IDisposable
         Debug.Log("я двигаюсь");
     }
 
-    private Vector2 GetMovementVectorNormalized()
+    public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
         inputVector = inputVector.normalized;
         return inputVector;
     }
 
-    public Vector3 GetMovementTransform()
+    public Vector3 GetMovementVectorMoveSpeed()
     {
         float moveSpeed = _playerMovementModel.Speed;
         Vector2 inputVector = GetMovementVectorNormalized();
+        Vector3 moveDir = new(inputVector.x * moveSpeed, 0f, 0f);
+        return moveDir;
+    }
 
-        Vector3 moveDir = new(inputVector.x, 0f, 0f);
-        return moveDir * moveSpeed;
+    public Vector3 GetMovementVectorJump()
+    {
+        float jumpForce = _playerMovementModel.JumpForce;
+        Vector2 inputVector = GetMovementVectorNormalized();
+        Vector3 jumpDIr = new(0f, inputVector.y * jumpForce, 0f);
+        return jumpDIr;
     }
 }
