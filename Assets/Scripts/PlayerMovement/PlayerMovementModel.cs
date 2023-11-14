@@ -7,7 +7,7 @@ public class PlayerMovementModel
 {
     private float _actualSpeed;
     private float _speed;
-    private float _jumpForce = 50f;
+    private float _jumpForce;
 
     public float ActualSpeed { get { return _actualSpeed; } }
     public float JumpForce { get { return _jumpForce; } }
@@ -23,10 +23,11 @@ public class PlayerMovementModel
 
     public event Action<float> OnSpeedChanged;
 
-    public PlayerMovementModel(float actualSpeed)
+    public PlayerMovementModel(PlayerMovementConfig playerMovementConfig)
     {
-        _actualSpeed = actualSpeed;
-        Speed = actualSpeed;
+        _actualSpeed = playerMovementConfig.Speed;
+        _jumpForce = playerMovementConfig.JumpPower;
+        Speed = _actualSpeed;
     }
 
 }
