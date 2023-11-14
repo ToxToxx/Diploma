@@ -6,8 +6,19 @@ using UnityEngine;
 public class PlayerMovementModel
 {
     private float _actualSpeed;
+    private float _speed;
 
-    public float Speed { get { return Speed; } set { OnSpeedChanged?.Invoke(Speed); } }
+    public float ActualSpeed { get { return _actualSpeed; } }
+
+    public float Speed
+    {
+        get { return _speed; }
+        set
+        {
+            _speed = value;
+            OnSpeedChanged?.Invoke(_speed);
+        }
+    } 
 
     public event Action<float> OnSpeedChanged;
 

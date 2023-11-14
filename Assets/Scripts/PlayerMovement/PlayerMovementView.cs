@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 public class PlayerMovementView : MonoBehaviour
@@ -11,17 +12,16 @@ public class PlayerMovementView : MonoBehaviour
     public void Construct(PlayerMovementController controller)
     {
         _playerMovementController = controller;
-        _playerMovementController.OnMove += ControllerOnMovePerformed;
     }
 
-    private void ControllerOnMovePerformed(Vector2 obj, float speed)
+    private void Update()
     {
-        Move(obj, speed);
+        Move();
     }
 
-    public void Move(Vector2 direction, float moveSpeed)
+    public void Move()
     {
-        transform.Translate(new Vector2(direction.x, direction.y) * moveSpeed * Time.deltaTime);
+        transform.Translate(_playerMovementController.GetMovementTransform() * Time.deltaTime);
     }
 
 }

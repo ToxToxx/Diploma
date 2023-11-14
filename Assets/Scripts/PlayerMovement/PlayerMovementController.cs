@@ -1,45 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XInput;
-using UnityEngine.InputSystem;
+
 using Zenject;
 using System;
+using UnityEngine.InputSystem;
 
-public class PlayerMovementController : IInitializable, IDisposable
+public class PlayerMovementController : IDisposable
 {
 
     private PlayerMovementModel _playerMovementModel;
     private PlayerInputAction _playerInputAction;
-    public event Action<Vector2, float> OnMove;
 
     [Inject]
     public void Construct(PlayerMovementModel playerMovementModel)
     {
-
         _playerMovementModel = playerMovementModel;
         _playerInputAction = new PlayerInputAction();
-
-    }
-
-    public void Initialize()
-    {
         _playerInputAction.Player.Move.performed += OnMovePerformed;
+        _playerInputAction.Player.Enable();
+
     }
     public void Dispose()
     {
-        _playerInputAction.Player.Move.performed -= OnMovePerformed;
+        _playerInputAction.Dispose();
     }
-
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
-        OnMove?.Invoke(moveInput, _playerMovementModel.Speed);
+        Debug.Log("я двигаюсь");
     }
 
-    public void SetMoveSpeed(float speed)
+    private Vector2 GetMovementVectorNormalized()
     {
-        _playerMovementModel.Speed = speed;
+        Vector2 inputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
+        return inputVector;
+    }
+
+    public Vector3 GetMovementTransform()
+    {
+        float moveSpeed = _playerMovementModel.Speed;
+        Vector2 inputVector = GetMovementVectorNormalized();
+
+        Vector3 moveDir = new(inputVector.x, 0f, 0f);
+        return moveDir * moveSpeed;
     }
 }
