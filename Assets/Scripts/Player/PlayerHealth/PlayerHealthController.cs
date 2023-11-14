@@ -15,7 +15,7 @@ public class PlayerHealthController : ITickable
 
     public void Tick()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             _healthModel.Health -= 10;
             OnHealthDecreased(_healthModel.Health);
