@@ -10,7 +10,6 @@ public class PlayerHealthModel
     {
         get { return _maxHealth; }
     }
-
     public int Health
     {
         get { return _currentHealth; }

@@ -8,7 +8,6 @@ public class PlayerHealthView : MonoBehaviour
     // [SerializeField] private Slider _healthSlider;
 
     private PlayerHealthController _healthController;
-    private PlayerHealthModel _healthModel;
 
     [Inject]
     public void Construct(PlayerHealthController controller)
