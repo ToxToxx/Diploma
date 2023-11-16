@@ -7,6 +7,7 @@ using Zenject;
 public class EnemyHealthController : MonoBehaviour
 {
     private IEnemyHealth _enemyHealthModel;
+    private EnemyHealthView _enemyHealthView;
     public event Action<int> OnHealthDecreased;
     [SerializeField] private EnemyConfig _enemyConfig;
 

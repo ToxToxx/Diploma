@@ -7,16 +7,16 @@ using Zenject;
 public class EnemyHealthView : MonoBehaviour
 {
     private EnemyHealthController _enemyHealthController;
-
-    public void SetEnemyController(EnemyHealthController enemyHealthController)
+    private void Start()
     {
-        _enemyHealthController = enemyHealthController;
+        _enemyHealthController = GetComponent<EnemyHealthController>();
 
         if (_enemyHealthController != null)
         {
             _enemyHealthController.OnHealthDecreased += UpdateHealthUI;
         }
     }
+
 
     private void UpdateHealthUI(int currentHealth)
     {
