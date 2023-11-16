@@ -6,7 +6,7 @@ using Zenject;
 
 public class EnemyHealthVIew : MonoBehaviour
 {
-    public TextMeshProUGUI healthText;
+    //public TextMeshProUGUI healthText;
 
     [Inject]
     public void SetHealthModel(IEnemyHealth healthModel)

@@ -7,14 +7,15 @@ public class EnemyHealthModel : IEnemyHealth
 {
     private int _currentHealth;
     private int _maxHealth;
-    public override event Action<int> OnHealthChanged;
+    public  event Action<int> OnHealthChanged;
 
-    public override int MaxHealth
+    public int MaxHealth
     {
         get { return _maxHealth; }
+        set { _maxHealth = value; }
     }
 
-    public override int CurrentHealth
+    public int CurrentHealth
     {
         get { return _currentHealth; }
         set { OnHealthChanged?.Invoke(_currentHealth); }
