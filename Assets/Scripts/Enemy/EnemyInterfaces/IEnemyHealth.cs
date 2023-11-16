@@ -5,8 +5,10 @@ using UnityEngine;
 
 public interface IEnemyHealth
 {
-    public  int CurrentHealth {get; set;}
-    public  int MaxHealth { get; set;}
+    public float CurrentHealth {get; set;}
+    public float MaxHealth { get; set;}
 
-    public event Action<int> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
+
+    public float Armor { get; set;}
 }

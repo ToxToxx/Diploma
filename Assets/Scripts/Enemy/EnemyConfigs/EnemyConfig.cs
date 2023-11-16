@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
 
@@ -8,10 +9,7 @@ public class EnemyConfig : ScriptableObject
 {
     public Transform EnemyPrefab;
     public int MaxHealth;
-    public TypeHealthModel HealthModelType;
-    public enum TypeHealthModel
-    {
-        Default,
-    }
-
+    public float Armor;
 }
+
+

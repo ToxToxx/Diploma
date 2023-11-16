@@ -5,6 +5,7 @@ using Zenject;
 public class PlayerHealthController : ITickable
 {
     public event Action<int> OnHealthDecreased;
+    public event EventHandler OnPlayerDeath;
     private PlayerHealthModel _healthModel;
 
     [Inject]
@@ -15,10 +16,18 @@ public class PlayerHealthController : ITickable
 
     public void Tick()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if(_healthModel.Health > 0)
         {
-            _healthModel.Health -= 10;
-            OnHealthDecreased(_healthModel.Health);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _healthModel.Health -= 10;
+                OnHealthDecreased(_healthModel.Health);
+
+            }
+        }
+        else 
+        {
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
         }
     }
 }

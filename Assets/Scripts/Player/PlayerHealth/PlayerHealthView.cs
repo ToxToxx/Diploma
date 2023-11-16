@@ -5,20 +5,29 @@ using Zenject;
 
 public class PlayerHealthView : MonoBehaviour
 {
-    // [SerializeField] private Slider _healthSlider;
-
     private PlayerHealthController _healthController;
 
     [Inject]
     public void Construct(PlayerHealthController controller)
     {
         _healthController = controller;
-        _healthController.OnHealthDecreased += UpdateHealthUI;
+        _healthController.OnHealthDecreased += UpdateHealthState;
+        _healthController.OnPlayerDeath += OnPlayerDeath;
     }
 
-    private void UpdateHealthUI(int health)
+    private void OnPlayerDeath(object sender, EventArgs e)
+    {
+        Destroy(gameObject);
+    }
+
+    private void UpdateHealthState(int health)
     {
         Debug.Log(health);
-        // _healthSlider.value = health;
+    }
+
+    private void OnDestroy()
+    {
+        _healthController.OnHealthDecreased -= UpdateHealthState;
+        _healthController.OnPlayerDeath -= OnPlayerDeath;
     }
 }

@@ -21,8 +21,7 @@ public class EnemyHealthView : MonoBehaviour
         }
     }
 
-
-    private void UpdateHealthUI(int currentHealth)
+    private void UpdateHealthUI(float currentHealth)
     {
         Debug.Log("Health: " + currentHealth);
     }

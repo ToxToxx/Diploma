@@ -2,17 +2,23 @@ using System;
 
 public class EnemyHealthModel : IEnemyHealth
 {
-    private int _currentHealth;
-    private int _maxHealth;
-    public event Action<int> OnHealthChanged;
+    protected float _currentHealth;
+    protected float _maxHealth;
+    protected float _armor;
+    public event Action<float> OnHealthChanged;
 
-    public int MaxHealth
+    public float Armor
+    {
+        get { return _armor; }
+        set { _armor = value; }
+    }
+    public float MaxHealth
     {
         get { return _maxHealth; }
         set { _maxHealth = value; }
     }
 
-    public int CurrentHealth
+    public float CurrentHealth
     {
         get { return _currentHealth; }
         set
@@ -26,5 +32,6 @@ public class EnemyHealthModel : IEnemyHealth
     {
         _maxHealth = enemyConfig.MaxHealth;
         _currentHealth = _maxHealth;
+        _armor = enemyConfig.Armor;
     }
 }

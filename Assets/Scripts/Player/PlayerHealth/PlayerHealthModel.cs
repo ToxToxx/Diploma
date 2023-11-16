@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHealthModel
@@ -35,6 +36,6 @@ public class PlayerHealthModel
 
     private void Die()
     {
-        // Действия при смерти
+       
     }
 }
