@@ -4,25 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class EnemyHealthController : IInitializable, ITickable
+public class EnemyHealthController : MonoBehaviour
 {
     private IEnemyHealth _enemyHealthModel;
-    private EnemyHealthVIew _enemyHealthView;
-    public event Action<int> OnHealthChanged;
+    public event Action<int> OnHealthDecreased;
+    [SerializeField] private EnemyConfig _enemyConfig;
 
-    [Inject]
-    public void Construct(IEnemyHealth healthModel, EnemyHealthVIew healthView)
+    private void Awake()
     {
-        this._enemyHealthModel = healthModel;
-        this._enemyHealthView = healthView;
+        _enemyHealthModel = new EnemyHealthModel(_enemyConfig);
     }
 
-    public void Initialize()
-    {
-        _enemyHealthView.SetHealthModel(_enemyHealthModel);
-    }
-
-    public void Tick()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -30,14 +23,14 @@ public class EnemyHealthController : IInitializable, ITickable
         }
     }
 
-
     public void TakeDamage(int amount)
     {
         _enemyHealthModel.CurrentHealth -= amount;
 
         if (_enemyHealthModel.CurrentHealth <= 0)
         {
-            _enemyHealthModel.CurrentHealth = 0;
+            Destroy(gameObject);
         }
+        OnHealthDecreased?.Invoke(_enemyHealthModel.CurrentHealth);
     }
 }

@@ -7,7 +7,7 @@ public class EnemyHealthModel : IEnemyHealth
 {
     private int _currentHealth;
     private int _maxHealth;
-    public  event Action<int> OnHealthChanged;
+    public event Action<int> OnHealthChanged;
 
     public int MaxHealth
     {
@@ -18,13 +18,16 @@ public class EnemyHealthModel : IEnemyHealth
     public int CurrentHealth
     {
         get { return _currentHealth; }
-        set { OnHealthChanged?.Invoke(_currentHealth); }
+        set
+        {
+            _currentHealth = value;
+            OnHealthChanged?.Invoke(_currentHealth);
+        }
     }
 
-    public EnemyHealthModel(int maxHealth)
+    public EnemyHealthModel(EnemyConfig enemyConfig)
     {
-        this._maxHealth = maxHealth;
-        this._currentHealth = maxHealth;
+        _maxHealth = enemyConfig.MaxHealth;
+        _currentHealth = _maxHealth;
     }
-
 }

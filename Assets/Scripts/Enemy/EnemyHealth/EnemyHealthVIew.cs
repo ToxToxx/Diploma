@@ -4,19 +4,31 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class EnemyHealthVIew : MonoBehaviour
+public class EnemyHealthView : MonoBehaviour
 {
-    //public TextMeshProUGUI healthText;
+    private EnemyHealthController _enemyHealthController;
 
-    [Inject]
-    public void SetHealthModel(IEnemyHealth healthModel)
+    public void SetEnemyController(EnemyHealthController enemyHealthController)
     {
-        healthModel.OnHealthChanged += UpdateHealthUI;
+        _enemyHealthController = enemyHealthController;
+
+        if (_enemyHealthController != null)
+        {
+            _enemyHealthController.OnHealthDecreased += UpdateHealthUI;
+        }
     }
 
     private void UpdateHealthUI(int currentHealth)
     {
-        //healthText.text = "Health: " + currentHealth;
         Debug.Log("Health: " + currentHealth);
     }
+
+    private void OnDisable()
+    {
+        if (_enemyHealthController != null)
+        {
+            _enemyHealthController.OnHealthDecreased -= UpdateHealthUI;
+        }
+    }
+
 }

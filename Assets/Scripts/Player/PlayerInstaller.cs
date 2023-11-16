@@ -1,9 +1,8 @@
 using UnityEngine;
 using Zenject;
 
-public class PlayerInstaller : MonoInstaller
+public class PlayerInstaller : Installer
 {
-    [SerializeField] private PlayerMovementConfig _playerMovementConfig;
     public override void InstallBindings()
     {
        BindPlayerHealth();
@@ -19,7 +18,6 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayerMovement()
     {
-        Container.Bind<PlayerMovementConfig>().FromInstance(_playerMovementConfig);
         Container.Bind<PlayerMovementModel>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle().NonLazy();
         Container.Bind<PlayerMovementView>().FromComponentInHierarchy().AsSingle();
