@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using Zenject;
+
 
 public class EnemyHealthView : MonoBehaviour
 {
     private EnemyHealthController _enemyHealthController;
     private void Start()
     {
-        _enemyHealthController = GetComponent<EnemyHealthController>();
+        try
+        {
+            _enemyHealthController = GetComponent<EnemyHealthController>();
+        }
+        catch
+        {
+            Debug.Log("No enemy health controller is attached");
+        }
 
         if (_enemyHealthController != null)
         {

@@ -1,19 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class EnemyHealthController : MonoBehaviour
 {
     private IEnemyHealth _enemyHealthModel;
-    private EnemyHealthView _enemyHealthView;
     public event Action<int> OnHealthDecreased;
     [SerializeField] private EnemyConfig _enemyConfig;
 
     private void Awake()
     {
-        _enemyHealthModel = new EnemyHealthModel(_enemyConfig);
+        SetEnemyHealthModel();
     }
 
     public void Update()
@@ -21,6 +17,16 @@ public class EnemyHealthController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             TakeDamage(10);
+        }
+    }
+
+    public void SetEnemyHealthModel()
+    {
+        switch (_enemyConfig.HealthModelType)
+        {
+            case EnemyConfig.TypeHealthModel.Default:
+                _enemyHealthModel = new EnemyHealthModel(_enemyConfig);
+                break;
         }
     }
 

@@ -8,4 +8,10 @@ public class EnemyConfig : ScriptableObject
 {
     public Transform EnemyPrefab;
     public int MaxHealth;
+    public TypeHealthModel HealthModelType;
+    public enum TypeHealthModel
+    {
+        Default,
+    }
+
 }
