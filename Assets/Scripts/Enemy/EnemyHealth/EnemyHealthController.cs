@@ -33,7 +33,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        _enemyHealthModel.CurrentHealth -= amount - (amount / _enemyHealthModel.Armor);
+        _enemyHealthModel.CurrentHealth -= amount - (amount * _enemyHealthModel.Armor);
         if (_enemyHealthModel.CurrentHealth <= 0)
         {
             Destroy(gameObject);

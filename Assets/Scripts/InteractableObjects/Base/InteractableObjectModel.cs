@@ -1,12 +1,23 @@
+using System;
+using UnityEngine;
 
-public class InteractableObjectModel : IOjbect
+public class InteractableObjectModel : IObject, IOnInteractReaction
 {
     public string InteractableObjectName { get; set; }
     public bool IsInteractable { get; set; }
 
-    public InteractableObjectModel(string interactableObjectName, bool isInteractable)
+    public InteractableObjectModel(InteractableObjectsConfig interactableObjectsConfig)
     {
-        InteractableObjectName = interactableObjectName;
-        IsInteractable = isInteractable;
+        InteractableObjectName = interactableObjectsConfig.InteractableObjectName;
+        IsInteractable = interactableObjectsConfig.IsInteractable;
+    }
+
+    public void InteractReact()
+    {
+        if(IsInteractable)
+        {
+            IsInteractable = false;
+            Debug.Log("You interact with Basic Interactable Object");
+        }
     }
 }

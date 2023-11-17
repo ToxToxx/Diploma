@@ -11,8 +11,8 @@ TagManager:
   - GameObjects
   - Water
   - UI
-  - 
-  - 
+  - InteractableObjects
+  - Player
   - 
   - 
   - 

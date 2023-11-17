@@ -9,7 +9,7 @@ public class EnemyConfig : ScriptableObject
 {
     public Transform EnemyPrefab;
     public int MaxHealth;
-    public float Armor;
+    [field:Range (0,1)]  public float Armor;
 }
 
 
