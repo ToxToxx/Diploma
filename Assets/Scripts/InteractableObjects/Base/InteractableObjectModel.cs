@@ -1,5 +1,5 @@
 
-public class InteractableObjectModel
+public class InteractableObjectModel : IOjbect
 {
     public string InteractableObjectName { get; set; }
     public bool IsInteractable { get; set; }

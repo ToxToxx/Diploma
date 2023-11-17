@@ -1,17 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class InteractableObjectController : IInteractable
+
+public class InteractableObjectController : MonoBehaviour,IInteractable
 {
-    private InteractableObjectModel _interactableObjectModel;
+    private IOjbect _interactableObjectModel;
     private InteractableObjectView _interactableObjectView;
     public event EventHandler OnInteractionWithObject;
 
-    public void Initialize(InteractableObjectModel model, InteractableObjectView view)
+    public void Initialize(IOjbect model, InteractableObjectView view)
     {
+        model = new InteractableObjectModel("Chest", true);
         this._interactableObjectModel = model;
         this._interactableObjectView = view;
         _interactableObjectView.Initialize(this);
