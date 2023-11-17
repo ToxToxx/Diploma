@@ -18,7 +18,7 @@ public class PlayerHealthController : ITickable
     {
         if(_healthModel.Health > 0)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 _healthModel.Health -= 10;
                 OnHealthDecreased(_healthModel.Health);
