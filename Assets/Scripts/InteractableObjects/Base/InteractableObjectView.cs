@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,13 @@ public class InteractableObjectView : MonoBehaviour
 {
     private InteractableObjectController _interactableObjectController;
 
-    public void Initialize(InteractableObjectController controller)
+    private void Awake()
     {
-        this._interactableObjectController = controller;
+        _interactableObjectController = GetComponent<InteractableObjectController>();
         _interactableObjectController.OnInteractionWithObject += OnInteractionWithObject;
     }
 
-    private void OnInteractionWithObject(object sender, System.EventArgs e)
+    private void OnInteractionWithObject(object sender, EventArgs e)
     {
         Debug.Log("INTERACT VIEW");
     }

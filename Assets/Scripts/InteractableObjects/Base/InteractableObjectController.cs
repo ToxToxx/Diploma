@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class InteractableObjectController : MonoBehaviour,IInteractable
 {
-    private IOjbect _interactableObjectModel;
-    private InteractableObjectView _interactableObjectView;
+    private IObject _interactableObjectModel;
     public event EventHandler OnInteractionWithObject;
 
-    public void Initialize(IOjbect model, InteractableObjectView view)
+    private void Awake()
     {
-        model = new InteractableObjectModel("Chest", true);
-        this._interactableObjectModel = model;
-        this._interactableObjectView = view;
-        _interactableObjectView.Initialize(this);
+        _interactableObjectModel = new InteractableObjectModel("chest", true);
     }
+
 
     public void Interact()
     {
-        if (_interactableObjectModel.IsInteractable)
+        if (_interactableObjectModel != null)
         {
-            Debug.Log("Interacting with " + _interactableObjectModel.InteractableObjectName);
-            
+            if (_interactableObjectModel.IsInteractable)
+            {
+                Debug.Log("Interacting with " + _interactableObjectModel.InteractableObjectName);
+            }
+            else
+            {
+                Debug.Log(_interactableObjectModel.InteractableObjectName + " is not interactable.");
+            }
+            OnInteractionWithObject?.Invoke(this, EventArgs.Empty);
         }
         else
         {
-            Debug.Log(_interactableObjectModel.InteractableObjectName + " is not interactable.");
+            Debug.LogError("InteractableObjectModel is not initialized!");
         }
-        OnInteractionWithObject?.Invoke(this, EventArgs.Empty);
     }
 }
