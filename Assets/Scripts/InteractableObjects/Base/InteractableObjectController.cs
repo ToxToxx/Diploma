@@ -21,16 +21,8 @@ public class InteractableObjectController : MonoBehaviour,IInteractable
     {
         if (_interactableObjectModel != null)
         {
-            if (_interactableObjectModel.IsInteractable)
-            {
-                Debug.Log("Interacting with " + _interactableObjectModel.InteractableObjectName);
-                _interactableObjectModel.InteractReact();
-                OnInteractionWithObject?.Invoke(this, EventArgs.Empty);
-            }
-            else
-            {
-                Debug.Log(_interactableObjectModel.InteractableObjectName + " is not interactable.");
-            }   
+            _interactableObjectModel.InteractReact();
+            OnInteractionWithObject?.Invoke(this, EventArgs.Empty);
         }
         else
         {

@@ -5,10 +5,10 @@ public class InteractableObjectsConfig : ScriptableObject
 {
     public string InteractableObjectName;
     public bool IsInteractable;
-    public TypeOfInteractableObject typeOfInteractableObject;
+    public TypeOfInteractableObject TypeOfObject;
 
     public enum TypeOfInteractableObject
     {
-        Default,
+        Base,
     }
 }

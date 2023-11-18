@@ -11,7 +11,7 @@ public class InteractableObjectTypeController
 
     public IObject InitializeTypeOfModel(InteractableObjectsConfig interactableObjectsConfig)
     {
-        InteractableObjectsConfig.TypeOfInteractableObject currentType = interactableObjectsConfig.TypeOfObject;
+        TypeOfInteractableObject currentType = interactableObjectsConfig.TypeOfObject;
         switch (currentType)
         {
             case (TypeOfInteractableObject.Base):

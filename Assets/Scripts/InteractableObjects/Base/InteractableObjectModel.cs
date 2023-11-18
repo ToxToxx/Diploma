@@ -16,8 +16,11 @@ public class InteractableObjectModel : IObject
     {
         if(IsInteractable)
         {
-            IsInteractable = false;
-            Debug.Log("You interact with Basic Interactable Object");
+            Debug.Log("You interact with: " + InteractableObjectName);
+        }
+        else
+        {
+            Debug.Log(InteractableObjectName + " is not interactable");
         }
     }
 }
