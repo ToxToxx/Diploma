@@ -7,8 +7,10 @@ using UnityEngine;
 public class InteractableObjectView : MonoBehaviour
 {
     private InteractableObjectController _interactableObjectController;
+
     [SerializeField] private GameObject _descriptionBoxUI;
     [SerializeField] private TextMeshProUGUI _descriptionBoxUIText;
+
     [SerializeField] private float _displayDuration = 3f; 
     [SerializeField] private float _baseFontSize = 200f; 
 
