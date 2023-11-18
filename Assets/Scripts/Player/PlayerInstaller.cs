@@ -13,7 +13,7 @@ public class PlayerInstaller : Installer
     {
         Container.BindInterfacesAndSelfTo<PlayerHealthController>().AsSingle().NonLazy();
         Container.Bind<PlayerHealthView>().FromComponentInHierarchy().AsSingle();
-        Container.BindInterfacesAndSelfTo<PlayerHealthModel>().AsSingle().WithArguments(100).NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerHealthModel>().AsSingle().WithArguments<float>(100).NonLazy();
     }
 
     private void BindPlayerMovement()

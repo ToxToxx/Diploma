@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerHealthModel
 {
-    private int _currentHealth;
-    private int _maxHealth;
+    private float _currentHealth;
+    private float _maxHealth;
 
-    public int MaxHealth
+    public float MaxHealth
     {
         get { return _maxHealth; }
     }
-    public int Health
+    public float Health
     {
         get { return _currentHealth; }
         set
@@ -26,9 +26,9 @@ public class PlayerHealthModel
         }
     }
 
-    public event Action<int> OnHealthChanged;
+    public event Action<float> OnHealthChanged;
 
-    public PlayerHealthModel(int maxHealth)
+    public PlayerHealthModel(float maxHealth)
     {
         _maxHealth = maxHealth;
         Health = maxHealth;

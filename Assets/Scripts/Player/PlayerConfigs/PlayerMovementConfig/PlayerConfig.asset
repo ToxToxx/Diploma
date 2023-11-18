@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 4
-  <JumpPower>k__BackingField: 50
+  <JumpPower>k__BackingField: 750
