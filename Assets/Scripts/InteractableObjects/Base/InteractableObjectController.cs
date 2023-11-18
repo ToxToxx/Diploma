@@ -5,13 +5,15 @@ using UnityEngine;
 public class InteractableObjectController : MonoBehaviour,IInteractable
 {
     [SerializeField] private InteractableObjectsConfig _interactableObjectsConfig;
-    private InteractableObjectModel _interactableObjectModel;
+    private IObject _interactableObjectModel;
     public event EventHandler OnInteractionWithObject;
+    private InteractableObjectTypeController _interactableObjectsTypeController;
 
 
     private void Awake()
     {
-        _interactableObjectModel = new InteractableObjectModel(_interactableObjectsConfig);
+        _interactableObjectsTypeController = new InteractableObjectTypeController();
+        _interactableObjectModel = _interactableObjectsTypeController.InitializeTypeOfModel(_interactableObjectsConfig);
     }
 
 
