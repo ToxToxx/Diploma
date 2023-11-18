@@ -37,6 +37,21 @@ public class PlayerMovementView : MonoBehaviour
     public void Move()
     {
         _playerRigidbody.velocity = new Vector2(_playerMovementController.GetMovementVectorMoveSpeed().x, _playerRigidbody.velocity.y);
+        FlipIfNeeded();
+    }
+
+    private void FlipIfNeeded()
+    {
+        float moveSpeed = _playerMovementController.GetMovementVectorMoveSpeed().x;
+
+        if (moveSpeed > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (moveSpeed < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public void Jump()
