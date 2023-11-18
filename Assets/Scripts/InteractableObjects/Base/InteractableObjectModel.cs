@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class InteractableObjectModel : IObject, IOnInteractReaction
+public class InteractableObjectModel : IObject
 {
     public string InteractableObjectName { get; set; }
     public bool IsInteractable { get; set; }
