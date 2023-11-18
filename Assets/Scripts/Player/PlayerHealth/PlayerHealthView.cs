@@ -21,7 +21,7 @@ public class PlayerHealthView : MonoBehaviour
         _healthController.OnHealthDecreased += UpdateHealthState;
         _healthController.OnPlayerDeath += OnPlayerDeath;
         _maxHealthPlayer = _healthController.GetMaxHealth();
-        _healthBarText.text = "Health: 100";
+        _healthBarText.text = "100";
     }
     private void OnPlayerDeath(object sender, EventArgs e)
     {
@@ -31,7 +31,7 @@ public class PlayerHealthView : MonoBehaviour
     private void UpdateHealthState(float health)
     {
         _currentHealth = health;
-        _healthBarText.text = "Health: " + _currentHealth;
+        _healthBarText.text = "" + _currentHealth;
         float fillAmount = _currentHealth / _maxHealthPlayer;
         _healthBarUI.fillAmount = fillAmount;
     }

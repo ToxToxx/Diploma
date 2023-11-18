@@ -5,8 +5,8 @@ using UnityEngine;
 public class InteractableObjectController : MonoBehaviour,IInteractable
 {
     [SerializeField] private InteractableObjectsConfig _interactableObjectsConfig;
-    private IObject _interactableObjectModel;
-    public event EventHandler OnInteractionWithObject;
+    private IInterectableObject _interactableObjectModel;
+    public event Action<string> OnInteractionWithObject;
     private InteractableObjectTypeController _interactableObjectsTypeController;
 
 
@@ -22,7 +22,7 @@ public class InteractableObjectController : MonoBehaviour,IInteractable
         if (_interactableObjectModel != null)
         {
             _interactableObjectModel.InteractReact();
-            OnInteractionWithObject?.Invoke(this, EventArgs.Empty);
+            OnInteractionWithObject?.Invoke(_interactableObjectModel.DescriptionBoxText);
         }
         else
         {

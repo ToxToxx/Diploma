@@ -3,13 +3,9 @@ using static InteractableObjectsConfig;
 
 public class InteractableObjectTypeController
 {
+    public InteractableObjectTypeController () { }
 
-    public InteractableObjectTypeController ()
-    {
-
-    }
-
-    public IObject InitializeTypeOfModel(InteractableObjectsConfig interactableObjectsConfig)
+    public IInterectableObject InitializeTypeOfModel(InteractableObjectsConfig interactableObjectsConfig)
     {
         TypeOfInteractableObject currentType = interactableObjectsConfig.TypeOfObject;
         switch (currentType)

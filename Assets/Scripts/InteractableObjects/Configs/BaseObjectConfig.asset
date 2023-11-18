@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6140fd21028914585eb1786f0d369b, type: 3}
   m_Name: BaseObjectConfig
   m_EditorClassIdentifier: 
-  InteractableObjectName: Trash
+  InteractableObjectName: Radio
   IsInteractable: 1
+  DescriptionBoxText: Radio starts playing...
+  TypeOfObject: 0

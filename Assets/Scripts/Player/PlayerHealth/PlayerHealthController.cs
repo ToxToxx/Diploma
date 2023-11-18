@@ -17,7 +17,12 @@ public class PlayerHealthController : ITickable
 
     public void Tick()
     {
-        if(_healthModel.Health > 0)
+        PlayerTakeDamage();
+    }
+
+    public void PlayerTakeDamage()
+    {
+        if (_healthModel.Health > 0)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -25,7 +30,7 @@ public class PlayerHealthController : ITickable
                 OnHealthDecreased(_healthModel.Health);
             }
         }
-        else 
+        else
         {
             OnPlayerDeath?.Invoke(this, EventArgs.Empty);
         }
