@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerRunModel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float CurrentStamina { get; set; }
+    public float MaxStamina { get; private set; }
+    public float SpeedCoef { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public PlayerRunModel(PlayerRunningConfig playerRunningConfig)
     {
-        
+        MaxStamina = playerRunningConfig.MaxStamina;
+        SpeedCoef = playerRunningConfig.SpeedCoef;
+        CurrentStamina = MaxStamina;
     }
 }
