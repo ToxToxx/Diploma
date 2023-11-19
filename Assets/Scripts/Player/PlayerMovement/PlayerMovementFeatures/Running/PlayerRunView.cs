@@ -11,7 +11,6 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     private PlayerRunController _runController;
 
     [SerializeField] private Image _staminaBarImage;
-    [SerializeField] private TextMeshProUGUI _staminaText;
 
     private float _maxStamina;
     private float _currentStamina = 100;
@@ -21,7 +20,6 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     {
         _runController = controller;
         _runController.OnPlayerRun += UpdateAnimationState;
-        _staminaText.text = "100";
     }
 
     private void Awake()
@@ -38,19 +36,10 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     private void UpdateStaminaState()
     {
         _currentStamina = _runController.GetCurrentStamina();
-        ChangeStaminaText();
         float fillAmount = _currentStamina / _maxStamina;
         _staminaBarImage.fillAmount = fillAmount;     
     }
 
-    private void ChangeStaminaText()
-    {
-        if(_currentStamina < 0)
-        {
-            _currentStamina = 0;     
-        }
-        _staminaText.text = "" + _currentStamina;
-    }
     public void Dispose()
     {
        _runController.OnPlayerRun -= UpdateAnimationState;
