@@ -20,7 +20,7 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     public void Construct(PlayerRunController controller)
     {
         _runController = controller;
-        //_runController.OnPlayerRun += UpdateStaminaState;
+        _runController.OnPlayerRun += UpdateAnimationState;
         _staminaText.text = "100";
     }
 
@@ -33,31 +33,26 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     {
         UpdateStaminaState();
     }
-/*
-    private void UpdateStaminaState(float currentStamina)
-    {
-        _currentStamina = currentStamina;
-        _staminaText.text = "" + _runController.GetCurrentStamina();
-        float fillAmount = currentStamina / _maxStamina;
-        _staminaBarImage.fillAmount = fillAmount;
-    }
-*/
+
+    private void UpdateAnimationState(bool isRunning) { }
     private void UpdateStaminaState()
     {
         _currentStamina = _runController.GetCurrentStamina();
-        _staminaText.text = "" + _currentStamina;
+        ChangeStaminaText();
         float fillAmount = _currentStamina / _maxStamina;
-        _staminaBarImage.fillAmount = fillAmount;
-        Debug.Log(_currentStamina);
-        /*
-        if (Input.GetKeyDown(KeyCode.I))
+        _staminaBarImage.fillAmount = fillAmount;     
+    }
+
+    private void ChangeStaminaText()
+    {
+        if(_currentStamina < 0)
         {
-            
-            _currentStamina -= 10;
-        }*/
+            _currentStamina = 0;     
+        }
+        _staminaText.text = "" + _currentStamina;
     }
     public void Dispose()
     {
-       //runController.OnPlayerRun -= UpdateStaminaState;
+       _runController.OnPlayerRun -= UpdateAnimationState;
     }
 }

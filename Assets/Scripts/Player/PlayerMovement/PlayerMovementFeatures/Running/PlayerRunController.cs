@@ -12,7 +12,7 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
     private PlayerInputAction _playerInputAction;
 
     private Coroutine _staminaRegenerationCoroutine;
-    public event Action<float> OnPlayerRun;
+    public event Action<bool> OnPlayerRun;
 
     private bool _isRunning = false;
     private float _staminaRegenerationCooldown = 1.0f;
@@ -55,7 +55,7 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
             _isRunning = true;
 
             UpdatePlayerSpeed();
-            OnPlayerRun?.Invoke(_playerRunModel.CurrentStamina);
+            OnPlayerRun?.Invoke(_isRunning);
         }
     }
 
@@ -86,7 +86,7 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
 
             if (!_isRunning && _playerRunModel.CurrentStamina < _playerRunModel.MaxStamina)
             {
-                _playerRunModel.CurrentStamina += _playerRunModel.StaminaRegenerationRate * Time.deltaTime;
+                _playerRunModel.CurrentStamina += _playerRunModel.StaminaRegenerationRate;
                 _playerRunModel.CurrentStamina = Mathf.Clamp(_playerRunModel.CurrentStamina, 0, _playerRunModel.MaxStamina);
             }
         }
