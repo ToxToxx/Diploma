@@ -61,8 +61,13 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
 
     private void DecreaseStamina()
     {
-        if (_isRunning)
+        if (_isRunning )
         {
+            if(_playerRunModel.CurrentStamina <= 0)
+            {
+                _isRunning = false;
+                _playerMovementModel.Speed = _initialSpeed;
+            }
             _playerRunModel.CurrentStamina -= _decreaseStaminaRate * Time.deltaTime;
         }
     }
