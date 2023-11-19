@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRunModel : MonoBehaviour
+public class PlayerRunModel
 {
     public float CurrentStamina { get; set; }
     public float MaxStamina { get; private set; }
