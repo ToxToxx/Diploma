@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerRunModel
 {
     public float CurrentStamina { get; set; }
+    public float StaminaRegenerationRate { get; private set; }
     public float MaxStamina { get; private set; }
     public float SpeedCoef { get; private set; }
 
@@ -12,6 +13,7 @@ public class PlayerRunModel
     {
         MaxStamina = playerRunningConfig.MaxStamina;
         SpeedCoef = playerRunningConfig.SpeedCoef;
+        StaminaRegenerationRate = playerRunningConfig.StaminaRegenerationRate;
         CurrentStamina = MaxStamina;
     }
 }

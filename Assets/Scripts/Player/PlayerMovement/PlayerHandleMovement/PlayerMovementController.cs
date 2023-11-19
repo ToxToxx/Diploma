@@ -28,6 +28,8 @@ public class PlayerMovementController : IDisposable
 
     public void Dispose()
     {
+        _playerInputAction.Player.Move.performed -= OnMovePerformed;
+        _playerInputAction.Player.Jump.performed -= OnJumpPerformed;
         _playerInputAction.Dispose();
     }
 
