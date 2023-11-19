@@ -5,18 +5,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class PlayerRunController : MonoBehaviour,IDisposable
+public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
 {
     private PlayerRunModel _playerRunModel;
     private PlayerMovementModel _playerMovementModel;
     private PlayerInputAction _playerInputAction;
-
 
     private Coroutine _staminaRegenerationCoroutine;
     public event Action<float> OnPlayerRun;
 
     private bool _isRunning = false;
     private float _staminaRegenerationCooldown = 1.0f;
+    private float _decreaseStaminaRate = 50f;
+
+    private float _initialSpeed;
 
     [Inject]
     public void Construct(PlayerMovementModel playerMovementModel, PlayerRunModel playerRunModel)
@@ -29,19 +31,21 @@ public class PlayerRunController : MonoBehaviour,IDisposable
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
 
+        _initialSpeed = _playerMovementModel.Speed;
+
         _staminaRegenerationCoroutine = StartCoroutine(RegenerateStamina());
     }
 
+    public void Tick()
+    {
+        DecreaseStamina();
+    }
     public void Dispose()
     {
         _playerInputAction.Player.Run.started -= OnRunStarted;
         _playerInputAction.Player.Run.canceled -= OnRunCanceled;
         _playerInputAction.Dispose();
 
-        if (_staminaRegenerationCoroutine != null)
-        {
-            StopCoroutine(_staminaRegenerationCoroutine);
-        }
     }
 
     private void OnRunStarted(InputAction.CallbackContext obj)
@@ -49,7 +53,17 @@ public class PlayerRunController : MonoBehaviour,IDisposable
         if (_playerRunModel.CurrentStamina > 0)
         {
             _isRunning = true;
+
             UpdatePlayerSpeed();
+            OnPlayerRun?.Invoke(_playerRunModel.CurrentStamina);
+        }
+    }
+
+    private void DecreaseStamina()
+    {
+        if (_isRunning)
+        {
+            _playerRunModel.CurrentStamina -= _decreaseStaminaRate * Time.deltaTime;
         }
     }
 
@@ -61,7 +75,7 @@ public class PlayerRunController : MonoBehaviour,IDisposable
 
     private void UpdatePlayerSpeed()
     {
-        _playerMovementModel.Speed = _isRunning ? _playerRunModel.SpeedCoef : 1.0f;
+        _playerMovementModel.Speed = _isRunning ? _initialSpeed * _playerRunModel.SpeedCoef : _initialSpeed;
     }
 
     private IEnumerator RegenerateStamina()
@@ -72,9 +86,19 @@ public class PlayerRunController : MonoBehaviour,IDisposable
 
             if (!_isRunning && _playerRunModel.CurrentStamina < _playerRunModel.MaxStamina)
             {
-                _playerRunModel.CurrentStamina += _playerRunModel.StaminaRegenerationRate;
+                _playerRunModel.CurrentStamina += _playerRunModel.StaminaRegenerationRate * Time.deltaTime;
                 _playerRunModel.CurrentStamina = Mathf.Clamp(_playerRunModel.CurrentStamina, 0, _playerRunModel.MaxStamina);
             }
         }
+    }
+
+    public float GetMaxStamina()
+    {
+        return _playerRunModel.MaxStamina;
+    }
+
+    public float GetCurrentStamina()
+    {
+        return _playerRunModel.CurrentStamina;
     }
 }

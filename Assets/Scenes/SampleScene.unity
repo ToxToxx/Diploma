@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 173843808}
   - component: {fileID: 173843807}
   m_Layer: 5
-  m_Name: PlayerHealthText
+  m_Name: StaminaBarText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,6 +868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 388749954}
+  - component: {fileID: 388749955}
   m_Layer: 5
   m_Name: PlayerStaminaUI
   m_TagString: Untagged
@@ -896,6 +897,20 @@ RectTransform:
   m_AnchoredPosition: {x: 476, y: -98}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &388749955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388749953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa149967c570f04cbcb952d2edee208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _staminaBarImage: {fileID: 1748399024}
+  _staminaText: {fileID: 173843807}
 --- !u!1 &479021696
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +924,7 @@ GameObject:
   - component: {fileID: 479021699}
   - component: {fileID: 479021702}
   - component: {fileID: 479021703}
+  - component: {fileID: 479021704}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1034,6 +1050,18 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &479021704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479021696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12573c04791cda4aa2143740cd8d3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &490798178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovementConfig: {fileID: 11400000, guid: 31fc8f6c742a5d5448db6d13c5f32690, type: 2}
+  _playerRunningConfig: {fileID: 11400000, guid: 3f644624de0d5a4408d77dce9922004f, type: 2}
 --- !u!1 &533217948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3017,7 +3046,7 @@ GameObject:
   - component: {fileID: 1748399025}
   - component: {fileID: 1748399024}
   m_Layer: 5
-  m_Name: PlayerHealthUIImage
+  m_Name: StaminaBarImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

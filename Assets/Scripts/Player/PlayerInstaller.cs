@@ -7,6 +7,7 @@ public class PlayerInstaller : Installer
     {
        BindPlayerHealth();
        BindPlayerMovement();
+       BindPlayerRunning();
     }
 
     private void BindPlayerHealth()
@@ -22,4 +23,12 @@ public class PlayerInstaller : Installer
         Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle().NonLazy();
         Container.Bind<PlayerMovementView>().FromComponentInHierarchy().AsSingle();
     }
+
+    private void BindPlayerRunning()
+    {
+        Container.Bind<PlayerRunModel>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerRunController>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<PlayerRunView>().FromComponentInHierarchy().AsSingle();
+    }
+
 }
