@@ -5,7 +5,7 @@ public class EnemyHealthController : MonoBehaviour
 {
     private IEnemyHealth _enemyHealthModel;
     public event Action<float> OnHealthDecreased;
-    [SerializeField] private EnemyConfig _enemyConfig;
+    [SerializeField] private EnemyHealthConfig _enemyConfig;
 
     private void Awake()
     {

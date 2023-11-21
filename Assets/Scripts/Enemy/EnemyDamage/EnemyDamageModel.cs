@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageModel : MonoBehaviour
+public class EnemyDamageModel : IEnemyDamage
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   public float EnemyDamageAmount { get; set; }
+    
 
-    // Update is called once per frame
-    void Update()
+   public EnemyDamageModel (EnemyDamageConfig enemyDamageConfig)
     {
-        
+        EnemyDamageAmount = enemyDamageConfig.DamageAmount;
     }
 }

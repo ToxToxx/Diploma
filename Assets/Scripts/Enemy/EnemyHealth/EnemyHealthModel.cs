@@ -28,7 +28,7 @@ public class EnemyHealthModel : IEnemyHealth
         }
     }
 
-    public EnemyHealthModel(EnemyConfig enemyConfig)
+    public EnemyHealthModel(EnemyHealthConfig enemyConfig)
     {
         _maxHealth = enemyConfig.MaxHealth;
         _currentHealth = _maxHealth;
