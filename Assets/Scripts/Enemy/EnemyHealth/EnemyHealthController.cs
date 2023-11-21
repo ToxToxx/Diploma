@@ -19,10 +19,6 @@ public class EnemyHealthController : MonoBehaviour
         }
         
     }
-    private void Start()
-    {
-        Debug.Log(_enemyHealthModel.GetType().Name);
-    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
