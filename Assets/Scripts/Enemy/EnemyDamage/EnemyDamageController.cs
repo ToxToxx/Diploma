@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 using Zenject.SpaceFighter;
@@ -6,15 +7,12 @@ using Zenject.SpaceFighter;
 public class EnemyDamageController : MonoBehaviour
 {
     private IEnemyDamage _enemyDamageModel;
-    [SerializeField] private EnemyDamageConfig _enemyDamageConfig;
-    [SerializeField] private GameObject _playerGameObject;
 
+    [SerializeField] private EnemyDamageConfig _enemyDamageConfig;
     private PlayerHealthController _playerHealthController;
 
-    [SerializeField] private float _attackRadius = 2f;
-    [SerializeField] private float _attackCooldown = 3f;
-
-    private bool _canAttack = true;
+    public float _attackCooldown = 3f;
+    private bool _canAttack = true; 
 
     [Inject]
     public void Construct(PlayerHealthController playerHealthController)
@@ -34,13 +32,14 @@ public class EnemyDamageController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _playerGameObject.transform.position);
-
-        if (distanceToPlayer <= _attackRadius && _canAttack)
+        if (collision.gameObject.GetComponent<PlayerHealthView>())
         {
-            StartCoroutine(AttackWithCooldown());
+            if (_canAttack)
+            {
+                StartCoroutine(AttackWithCooldown());
+            }
         }
     }
 
@@ -54,9 +53,6 @@ public class EnemyDamageController : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (_playerGameObject != null)
-        {
-            _playerHealthController.PlayerTakeDamage(_enemyDamageModel.EnemyDamageAmount);
-        }
+        _playerHealthController.PlayerTakeDamage(_enemyDamageModel.EnemyDamageAmount);
     }
 }
