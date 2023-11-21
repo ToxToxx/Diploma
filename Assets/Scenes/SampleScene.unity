@@ -2338,6 +2338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3513099857428031240, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: _playerGameObject
+      value: 
+      objectReference: {fileID: 479021696}
     - target: {fileID: 5338159254993071493, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.55
@@ -2378,29 +2382,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8324527606853296725, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 7304717940825470963, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9016490138360795758, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-      propertyPath: attackRadius
-      value: 5
+    - target: {fileID: 7860233882665183212, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: m_Size.x
+      value: 5.3550453
       objectReference: {fileID: 0}
-    - target: {fileID: 9016490138360795758, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-      propertyPath: _attackRadius
-      value: 4
+    - target: {fileID: 7860233882665183212, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: m_Size.y
+      value: 3.2160995
       objectReference: {fileID: 0}
-    - target: {fileID: 9016490138360795758, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-      propertyPath: _playerGameObject
-      value: 
-      objectReference: {fileID: 479021696}
+    - target: {fileID: 7860233882665183212, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.2592678
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860233882665183212, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.1080498
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2359298548468260817, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 2111802956}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
 --- !u!1 &1406056650
 GameObject:
@@ -3585,56 +3590,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2111802949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2359298548468260817, guid: c6be1a8d6e1497f43b3af29462664b53, type: 3}
-  m_PrefabInstance: {fileID: 1386218831}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &2111802956
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111802949}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.27667046, y: 1.1804655}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.6111946, y: 3.360931}
-  m_EdgeRadius: 0
 --- !u!1 &2114782587
 GameObject:
   m_ObjectHideFlags: 0
