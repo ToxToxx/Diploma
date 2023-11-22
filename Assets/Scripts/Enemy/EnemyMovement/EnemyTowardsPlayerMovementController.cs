@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject _restingPositionObject;
     private IEnemyMovement _enemyMovementModel;
 
-    private bool flip;
     private enum EnemyState
     {
         Resting,
@@ -16,13 +15,16 @@ public class EnemyController : MonoBehaviour
     }
 
     [SerializeField] private EnemyState currentState = EnemyState.Resting;
-    private Vector3 restingPosition; // Позиция, где враг начинает отдыхать
-    private float _detectionDistance = 10f; // Расстояние для детекции игрока
+    private Vector3 restingPosition;
+
+    [SerializeField]private float _detectionDistance = 10f;
+
+    private bool flip;
 
     private void Awake()
     {
         _enemyMovementModel = new EnemyMovementModel(_enemyMovementConfig);
-        restingPosition = _restingPositionObject.transform.position; // Сохраняем начальную позицию для отдыха
+        restingPosition = _restingPositionObject.transform.position;
     }
 
     private void Update()
@@ -52,7 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void MoveTowards(Vector3 targetPosition)
     {
-        if (currentState != EnemyState.Resting)
+        if (currentState != EnemyState.Resting && transform.position != targetPosition)
         {
             Vector3 scale = transform.localScale;
 
@@ -68,6 +70,9 @@ public class EnemyController : MonoBehaviour
             transform.localScale = scale;
             Vector3 direction = (targetPosition - transform.position).normalized;
             transform.Translate(direction * _enemyMovementModel.EnemySpeed * Time.deltaTime, Space.World);
+        } else
+        {
+            currentState = EnemyState.Resting;
         }
     }
 
