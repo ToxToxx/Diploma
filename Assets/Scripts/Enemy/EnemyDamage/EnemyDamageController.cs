@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class EnemyDamageController : MonoBehaviour
 
     [SerializeField] private EnemyDamageConfig _enemyDamageConfig;
     [SerializeField] private GameObject _playerGameObject;
+
+    public event Action<float> OnDamageDealed;
 
     private PlayerHealthController _playerHealthController;
 
@@ -49,6 +52,7 @@ public class EnemyDamageController : MonoBehaviour
         if (_playerGameObject != null)
         {
             _playerHealthController.PlayerTakeDamage(_enemyDamageModel.EnemyDamageAmount);
+            OnDamageDealed?.Invoke(_enemyDamageModel.EnemyDamageAmount);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
