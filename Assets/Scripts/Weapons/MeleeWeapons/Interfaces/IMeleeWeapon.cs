@@ -9,6 +9,6 @@ public interface IMeleeWeapon
     public float AttackDamage { get; set; }
     public float AttackSpeed { get; set; }
     public float AttackDistance { get; set; }
-    public Image WeaponImage { get; set; }
+    public Sprite WeaponImage { get; set; }
     public string WeaponDescription { get; set; }
 }
