@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FirstEnemyHealthConfig
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 0}
-  MaxHealth: 150
-  Armor: 0.3
+  MaxHealth: 30
+  Armor: 0.2
