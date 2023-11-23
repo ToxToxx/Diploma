@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyChasingMovementController : MonoBehaviour
 {
     [SerializeField] private EnemyMovementConfig _enemyMovementConfig;
     [SerializeField] private GameObject _player;
