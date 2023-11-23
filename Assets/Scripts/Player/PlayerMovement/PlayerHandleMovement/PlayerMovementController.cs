@@ -7,40 +7,38 @@ public class PlayerMovementController : IDisposable
 {
 
     private PlayerMovementModel _playerMovementModel;
-    private PlayerInputAction _playerInputAction;
     public event EventHandler OnPlayersJump;
+    private PlayerInputSystem _playerInputSystem;
 
     [Inject]
-    public void Construct(PlayerMovementModel playerMovementModel)
+    public void Construct(PlayerMovementModel playerMovementModel, PlayerInputSystem playerInputSystem)
     {
         _playerMovementModel = playerMovementModel;
-        _playerInputAction = new PlayerInputAction();
-        _playerInputAction.Player.Move.performed += OnMovePerformed;
-        _playerInputAction.Player.Jump.performed += OnJumpPerformed;
-        _playerInputAction.Player.Enable();
+        _playerInputSystem = playerInputSystem;
+        _playerInputSystem.OnJumpPlayerInputPerformed += OnPlayerInputJump;
+        _playerInputSystem.OnMovePlayerInputPerformed += OnPlayerInputMove;
 
     }
 
-    private void OnJumpPerformed(InputAction.CallbackContext obj)
+    private void OnPlayerInputJump(InputAction.CallbackContext obj)
     {
         OnPlayersJump?.Invoke(this, EventArgs.Empty);
     }
 
     public void Dispose()
     {
-        _playerInputAction.Player.Move.performed -= OnMovePerformed;
-        _playerInputAction.Player.Jump.performed -= OnJumpPerformed;
-        _playerInputAction.Dispose();
+        _playerInputSystem.OnJumpPlayerInputPerformed -= OnPlayerInputJump;
+        _playerInputSystem.OnMovePlayerInputPerformed -= OnPlayerInputMove;
     }
 
-    private void OnMovePerformed(InputAction.CallbackContext context)
+    private void OnPlayerInputMove(InputAction.CallbackContext context)
     {
         Debug.Log("я двигаюсь");
     }
 
     public Vector2 GetMovementVectorNormalized()
     {
-        Vector2 inputVector = _playerInputAction.Player.Move.ReadValue<Vector2>();
+        Vector2 inputVector = _playerInputSystem.GetInputAction().Player.Move.ReadValue<Vector2>();
         inputVector = inputVector.normalized;
         return inputVector;
     }

@@ -5,10 +5,10 @@ public class PlayerInstaller : Installer
 {
     public override void InstallBindings()
     {
+       BindPlayerInput();
        BindPlayerHealth();
        BindPlayerMovement();
        BindPlayerRunning();
-       BindPlayerInput();
     }
 
     private void BindPlayerHealth()
