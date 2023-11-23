@@ -12,4 +12,10 @@ public class MeleeWeaponConfig : ScriptableObject
     public Sprite WeaponImage;
     public Sprite WeaponSprite;
     public string WeaponDescription;
+    public  MeleeWeaponType Type;
+    public enum MeleeWeaponType
+    {
+        Default,
+
+    }
 }
