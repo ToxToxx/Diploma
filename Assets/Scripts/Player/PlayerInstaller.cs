@@ -8,6 +8,7 @@ public class PlayerInstaller : Installer
        BindPlayerHealth();
        BindPlayerMovement();
        BindPlayerRunning();
+       BindPlayerInput();
     }
 
     private void BindPlayerHealth()
@@ -31,4 +32,8 @@ public class PlayerInstaller : Installer
         Container.Bind<PlayerRunView>().FromComponentInHierarchy().AsSingle();
     }
 
+    private void BindPlayerInput()
+    {
+        Container.Bind<PlayerInputSystem>().AsSingle().NonLazy();
+    }
 }

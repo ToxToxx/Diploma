@@ -36,4 +36,9 @@ public class EnemyHealthController : MonoBehaviour
         }
         OnHealthDecreased?.Invoke(_enemyHealthModel.CurrentHealth);
     }
+
+    public float GetHealth()
+    {
+        return _enemyHealthModel.CurrentHealth;
+    }
 }
