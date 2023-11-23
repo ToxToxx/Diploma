@@ -1,22 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
-public class PlayerInteractionController : MonoBehaviour
+public class PlayerInteractionController : MonoBehaviour, IDisposable
 {
     [SerializeField] private Transform _interactorSource;
     [SerializeField] private float _interactRange;
-    private PlayerInputAction _playerInputAction;
+    private PlayerInputSystem _playerInputSystem;
     [SerializeField] private LayerMask interactableLayer;
+
+    [Inject]
+    public void Construct(PlayerInputSystem playerInputSystem)
+    {
+        _playerInputSystem = playerInputSystem;
+    }
 
     private void Awake()
     {
-        _playerInputAction = new PlayerInputAction();
-        _playerInputAction.Player.Interact.performed += OnInteractPerformed;
-        _playerInputAction.Player.Enable();
+        _playerInputSystem.OnInteractPlayerInputPerformed += PlayerInputSystemInteractPerformed;
     }
-    private void OnInteractPerformed(InputAction.CallbackContext obj)
+
+    private void PlayerInputSystemInteractPerformed(InputAction.CallbackContext obj)
     {
         Debug.Log("Player Interacts");
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
@@ -33,4 +40,8 @@ public class PlayerInteractionController : MonoBehaviour
         }
     }
 
+   public void Dispose()
+    {
+        _playerInputSystem.OnInteractPlayerInputPerformed -= PlayerInputSystemInteractPerformed;
+    }
 }

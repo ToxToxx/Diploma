@@ -17,7 +17,6 @@ public class PlayerMovementController : IDisposable
         _playerInputSystem = playerInputSystem;
         _playerInputSystem.OnJumpPlayerInputPerformed += OnPlayerInputJump;
         _playerInputSystem.OnMovePlayerInputPerformed += OnPlayerInputMove;
-
     }
 
     private void OnPlayerInputJump(InputAction.CallbackContext obj)

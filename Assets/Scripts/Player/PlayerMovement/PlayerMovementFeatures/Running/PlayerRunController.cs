@@ -9,7 +9,7 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
 {
     private PlayerRunModel _playerRunModel;
     private PlayerMovementModel _playerMovementModel;
-    private PlayerInputAction _playerInputAction;
+    private PlayerInputSystem _playerInputSystem;
 
     private Coroutine _staminaRegenerationCoroutine;
     public event Action<bool> OnPlayerRun;
@@ -21,18 +21,16 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
     private float _initialSpeed;
 
     [Inject]
-    public void Construct(PlayerMovementModel playerMovementModel, PlayerRunModel playerRunModel)
+    public void Construct(PlayerMovementModel playerMovementModel, PlayerRunModel playerRunModel, PlayerInputSystem playerInputSystem)
     {
         _playerMovementModel = playerMovementModel;
         _playerRunModel = playerRunModel;
-        _playerInputAction = new PlayerInputAction();
-        _playerInputAction.Player.Enable();
+        _playerInputSystem = playerInputSystem;
 
-        _playerInputAction.Player.Run.started += OnRunStarted;
-        _playerInputAction.Player.Run.canceled += OnRunCanceled;
+        _playerInputSystem.OnRunPlayerInputStarted += OnRunStarted;
+        _playerInputSystem.OnRunPlayerInputCanceled += OnRunCanceled;
 
         _initialSpeed = _playerMovementModel.Speed;
-
         _staminaRegenerationCoroutine = StartCoroutine(RegenerateStamina());
     }
 
@@ -42,10 +40,8 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
     }
     public void Dispose()
     {
-        _playerInputAction.Player.Run.started -= OnRunStarted;
-        _playerInputAction.Player.Run.canceled -= OnRunCanceled;
-        _playerInputAction.Dispose();
-
+        _playerInputSystem.OnRunPlayerInputStarted -= OnRunStarted;
+        _playerInputSystem.OnRunPlayerInputCanceled -= OnRunStarted;
     }
 
     private void OnRunStarted(InputAction.CallbackContext obj)

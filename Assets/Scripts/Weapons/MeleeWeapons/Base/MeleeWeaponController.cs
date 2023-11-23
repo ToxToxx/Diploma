@@ -2,15 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class MeleeWeaponController : MonoBehaviour
 {
     [SerializeField] private MeleeWeaponConfig _meleeWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
+
     private IMeleeWeapon _meleeWeaponModel;
     private MeleeWeaponTypeController _meleeWeaponTypeController;
-    private InputAction _playerInputAction;
 
+    private PlayerInputSystem _playerInputSystem;
+
+    [Inject]
+    public void Construct(PlayerInputSystem playerInputSystem)
+    {
+        _playerInputSystem = playerInputSystem;
+        _playerInputSystem.OnAttackPlayerInputPerformed += OnMeleeWeaponAttackPerformed;
+    }
+
+    private void OnMeleeWeaponAttackPerformed(InputAction.CallbackContext obj)
+    {
+        PerformAttack();
+    }
 
     private void Awake()
     {
@@ -20,23 +34,13 @@ public class MeleeWeaponController : MonoBehaviour
     private void PerformAttack()
     {
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
-        foreach(var enemy in enemiesToDamage)
+        foreach (var enemy in enemiesToDamage)
         {
             if (enemy.GetComponent<EnemyHealthController>())
             {
                 enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
                 Debug.Log(enemy.GetComponent<EnemyHealthController>().GetHealth());
-            }  
-        }
-
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            PerformAttack();
+            }
         }
     }
 }
