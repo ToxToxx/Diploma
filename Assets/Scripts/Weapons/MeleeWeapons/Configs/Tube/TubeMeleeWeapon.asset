@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b80cfd8af2a27d48a14b5d95f6e2942, type: 3}
-  m_Name: Knife
+  m_Name: TubeMeleeWeapon
   m_EditorClassIdentifier: 
-  Name: Knife
-  AttackDamage: 10
-  AttackSpeed: 1
-  AttackDistance: 5
-  WeaponImage: {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
-  WeaponSprite: {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
-  WeaponDescription: Knife
+  Name: Tube
+  AttackDamage: 5
+  AttackSpeed: 0.5
+  AttackDistance: 20
+  WeaponImage: {fileID: 21300000, guid: 00f165b1254df1346b4653643b7997d9, type: 3}
+  WeaponSprite: {fileID: 21300000, guid: 00f165b1254df1346b4653643b7997d9, type: 3}
+  WeaponDescription: Good distance low damage
   Type: 0
