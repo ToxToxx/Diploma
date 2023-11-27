@@ -5,13 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
+public class PlayerStaminaAndRunController : MonoBehaviour, IDisposable, ITickable
 {
     private PlayerRunModel _playerRunModel;
     private PlayerMovementModel _playerMovementModel;
     private PlayerInputSystem _playerInputSystem;
 
-    private Coroutine _staminaRegenerationCoroutine;
     public event Action<bool> OnPlayerRun;
 
     private bool _isRunning = false;
@@ -31,9 +30,9 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
         _playerInputSystem.OnRunPlayerInputCanceled += OnRunCanceled;
 
         _initialSpeed = _playerMovementModel.Speed;
-        _staminaRegenerationCoroutine = StartCoroutine(RegenerateStamina());
+        StartCoroutine(RegenerateStamina());
     }
-
+  
     public void Tick()
     {
         DecreaseStamina();
@@ -54,12 +53,21 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
             OnPlayerRun?.Invoke(_isRunning);
         }
     }
+    private void OnRunCanceled(InputAction.CallbackContext obj)
+    {
+        _isRunning = false;
+        UpdatePlayerSpeed();
+    }
+    private void UpdatePlayerSpeed()
+    {
+        _playerMovementModel.Speed = _isRunning ? _initialSpeed * _playerRunModel.SpeedCoef : _initialSpeed;
+    }
 
     private void DecreaseStamina()
     {
-        if (_isRunning )
+        if (_isRunning)
         {
-            if(_playerRunModel.CurrentStamina <= 0)
+            if (_playerRunModel.CurrentStamina <= 0)
             {
                 _isRunning = false;
                 _playerMovementModel.Speed = _initialSpeed;
@@ -67,18 +75,10 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
             _playerRunModel.CurrentStamina -= _decreaseStaminaRate * Time.deltaTime;
         }
     }
-
-    private void OnRunCanceled(InputAction.CallbackContext obj)
+    public void DecreaseStaminaOnAmount(float amount)
     {
-        _isRunning = false;
-        UpdatePlayerSpeed();
+        _playerRunModel.CurrentStamina -= amount;
     }
-
-    private void UpdatePlayerSpeed()
-    {
-        _playerMovementModel.Speed = _isRunning ? _initialSpeed * _playerRunModel.SpeedCoef : _initialSpeed;
-    }
-
     private IEnumerator RegenerateStamina()
     {
         while (true)
@@ -97,7 +97,6 @@ public class PlayerRunController : MonoBehaviour, IDisposable, ITickable
     {
         return _playerRunModel.MaxStamina;
     }
-
     public float GetCurrentStamina()
     {
         return _playerRunModel.CurrentStamina;

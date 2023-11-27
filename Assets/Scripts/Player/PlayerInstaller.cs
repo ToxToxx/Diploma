@@ -28,7 +28,7 @@ public class PlayerInstaller : Installer
     private void BindPlayerRunning()
     {
         Container.Bind<PlayerRunModel>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<PlayerRunController>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerStaminaAndRunController>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<PlayerRunView>().FromComponentInHierarchy().AsSingle();
     }
 

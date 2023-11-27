@@ -8,7 +8,7 @@ using Zenject;
 
 public class PlayerRunView : MonoBehaviour, IDisposable
 {
-    private PlayerRunController _runController;
+    private PlayerStaminaAndRunController _runController;
 
     [SerializeField] private Image _staminaBarImage;
 
@@ -16,7 +16,7 @@ public class PlayerRunView : MonoBehaviour, IDisposable
     private float _currentStamina = 100;
 
     [Inject]
-    public void Construct(PlayerRunController controller)
+    public void Construct(PlayerStaminaAndRunController controller)
     {
         _runController = controller;
         _runController.OnPlayerRun += UpdateAnimationState;

@@ -13,15 +13,22 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
     private MeleeWeaponTypeController _meleeWeaponTypeController;
 
     private PlayerInputSystem _playerInputSystem;
+    private PlayerStaminaAndRunController _playerStaminaAndRunController;
+
     private bool canAttack = true;
     private float AttackSpeedCoef = 1.0f;
 
     [Inject]
-    public void Construct(PlayerInputSystem playerInputSystem)
+    public void Construct(PlayerInputSystem playerInputSystem, PlayerStaminaAndRunController playerStaminaAndRunController)
     {
         _playerInputSystem = playerInputSystem;
         _playerInputSystem.OnAttackPlayerInputPerformed += OnMeleeWeaponAttackPerformed;
+        _playerInputSystem.OnAlternativeAttackPlayerInputPerformed += OnMeleeWeaponAlternativeAttackPerformed;
+
+        _playerStaminaAndRunController = playerStaminaAndRunController;
     }
+
+
 
     private void Awake()
     {
@@ -37,7 +44,14 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
             PerformAttack();
         }
     }
-
+    private void OnMeleeWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
+    {
+        if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost)
+        {
+            StartCoroutine(AttackCooldown());
+            PerformAlternativeAttack();
+        }
+    }
     private IEnumerator AttackCooldown()
     {
         canAttack = false;
@@ -54,6 +68,21 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
             if (enemy.GetComponent<EnemyHealthController>())
             {
                 enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
+                Debug.Log(enemy.GetComponent<EnemyHealthController>().GetHealth());
+            }
+        }
+    }
+    private void PerformAlternativeAttack()
+    {
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+
+        _playerStaminaAndRunController.DecreaseStaminaOnAmount(_meleeWeaponModel.AlternativeAttackStaminaCost);
+
+        foreach (var enemy in enemiesToDamage)
+        {
+            if (enemy.GetComponent<EnemyHealthController>())
+            {
+                enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage * _meleeWeaponModel.AlternativeAttackCritDamage);
                 Debug.Log(enemy.GetComponent<EnemyHealthController>().GetHealth());
             }
         }

@@ -9,6 +9,8 @@ public class MeleeWeaponConfig : ScriptableObject
     public float AttackDamage;
     public float AttackSpeed;
     public float AttackDistance;
+    public float AlternativeAttackCritDamage;
+    public float AlternativeAttackStaminaCost;
     public Sprite WeaponImage;
     public Sprite WeaponSprite;
     public string WeaponDescription;

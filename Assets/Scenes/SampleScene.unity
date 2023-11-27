@@ -2408,7 +2408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3334ef3bde7724d4a8a5310797a1e019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleeWeaponConfig: {fileID: 11400000, guid: 05010ba8f77bb3848abd4c8cf1965dc7, type: 2}
+  _meleeWeaponConfig: {fileID: 11400000, guid: 3f1675a431f1ee845a6ccb40757f91e2, type: 2}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 512
