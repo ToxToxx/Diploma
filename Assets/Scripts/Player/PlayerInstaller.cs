@@ -29,7 +29,7 @@ public class PlayerInstaller : Installer
     {
         Container.Bind<PlayerRunModel>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStaminaAndRunController>().FromComponentInHierarchy().AsSingle().NonLazy();
-        Container.Bind<PlayerRunView>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerStaminaView>().FromComponentInHierarchy().AsSingle();
     }
 
     private void BindPlayerInput()

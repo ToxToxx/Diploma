@@ -34,6 +34,7 @@ public class EnemyHealthController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Debug.Log("Получено урона: " + amount);
         OnHealthDecreased?.Invoke(_enemyHealthModel.CurrentHealth);
     }
 

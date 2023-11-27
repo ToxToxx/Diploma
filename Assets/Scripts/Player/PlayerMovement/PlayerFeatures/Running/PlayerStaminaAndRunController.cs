@@ -93,6 +93,10 @@ public class PlayerStaminaAndRunController : MonoBehaviour, IDisposable, ITickab
         }
     }
 
+    public void SetCurrentStamina(float amount)
+    {
+        _playerRunModel.CurrentStamina = amount;
+    }
     public float GetMaxStamina()
     {
         return _playerRunModel.MaxStamina;

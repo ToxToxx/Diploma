@@ -17,10 +17,13 @@ public class MeleeWeaponModel : IMeleeWeapon
     public MeleeWeaponModel (MeleeWeaponConfig meleeWeaponConfig)
     {
         Name = meleeWeaponConfig.Name;
+
         AttackDamage = meleeWeaponConfig.AttackDamage;
         AlternativeAttackCritDamage = meleeWeaponConfig.AlternativeAttackCritDamage;
         AttackSpeed = meleeWeaponConfig.AttackSpeed;
         AttackDistance = meleeWeaponConfig.AttackDistance;
+        AlternativeAttackStaminaCost = meleeWeaponConfig.AlternativeAttackStaminaCost; 
+
         WeaponImage = meleeWeaponConfig.WeaponImage;
         WeaponSprite = meleeWeaponConfig.WeaponSprite;
         WeaponDescription = meleeWeaponConfig.WeaponDescription;

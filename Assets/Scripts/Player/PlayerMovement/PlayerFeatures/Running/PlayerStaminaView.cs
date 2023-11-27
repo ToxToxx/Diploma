@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PlayerRunView : MonoBehaviour, IDisposable
+public class PlayerStaminaView : MonoBehaviour, IDisposable
 {
     private PlayerStaminaAndRunController _runController;
 

@@ -28,8 +28,6 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
         _playerStaminaAndRunController = playerStaminaAndRunController;
     }
 
-
-
     private void Awake()
     {
         _meleeWeaponTypeController = new MeleeWeaponTypeController();
@@ -44,14 +42,18 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
             PerformAttack();
         }
     }
+
     private void OnMeleeWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
     {
         if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost)
         {
+            _playerStaminaAndRunController.DecreaseStaminaOnAmount(_meleeWeaponModel.AlternativeAttackStaminaCost);
+
             StartCoroutine(AttackCooldown());
             PerformAlternativeAttack();
         }
     }
+
     private IEnumerator AttackCooldown()
     {
         canAttack = false;
@@ -61,31 +63,53 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
 
     private void PerformAttack()
     {
-        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
-
-        foreach (var enemy in enemiesToDamage)
+        if (IsFacingEnemy())
         {
-            if (enemy.GetComponent<EnemyHealthController>())
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+
+            foreach (var enemy in enemiesToDamage)
             {
-                enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
-                Debug.Log(enemy.GetComponent<EnemyHealthController>().GetHealth());
+                if (enemy.GetComponent<EnemyHealthController>())
+                {
+                    enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
+                }
             }
         }
     }
+
     private void PerformAlternativeAttack()
     {
-        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
-
-        _playerStaminaAndRunController.DecreaseStaminaOnAmount(_meleeWeaponModel.AlternativeAttackStaminaCost);
-
-        foreach (var enemy in enemiesToDamage)
+        if (IsFacingEnemy())
         {
-            if (enemy.GetComponent<EnemyHealthController>())
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+
+            foreach (var enemy in enemiesToDamage)
             {
-                enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage * _meleeWeaponModel.AlternativeAttackCritDamage);
-                Debug.Log(enemy.GetComponent<EnemyHealthController>().GetHealth());
+                if (enemy.GetComponent<EnemyHealthController>())
+                {
+                    enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage * _meleeWeaponModel.AlternativeAttackCritDamage);
+                }
             }
         }
+    }
+
+    private bool IsFacingEnemy()
+    {
+        bool isFacingRight = transform.localScale.x > 0;
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+
+        foreach (var enemy in enemies)
+        {
+            Vector2 directionToEnemy = enemy.transform.position - transform.position;
+
+            if ((isFacingRight && directionToEnemy.x > 0) || (!isFacingRight && directionToEnemy.x < 0))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void Dispose()
