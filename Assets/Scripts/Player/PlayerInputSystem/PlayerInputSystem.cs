@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputSystem: IDisposable
 {
@@ -18,6 +19,7 @@ public class PlayerInputSystem: IDisposable
     public event Action<InputAction.CallbackContext> OnInteractPlayerInputPerformed;
 
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
+    public event Action<InputAction.CallbackContext> OnAlternativeAttackPlayerInputPerformed;
 
 
     [Inject]
@@ -29,38 +31,45 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Move.performed += OnMovePerformed;
         _playerInputAction.Player.Jump.performed += OnJumpPerformed;
         _playerInputAction.Player.Interact.performed += OnInteractPerformed;
+
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
+
         _playerInputAction.Player.Attack.performed += OnAttackPerformed;
+        _playerInputAction.Player.AlternativeAttack.performed += OnAlternativeAttackPerformed;
 
     }
 
+    private void OnAlternativeAttackPerformed(CallbackContext obj)
+    {
+        OnAlternativeAttackPlayerInputPerformed?.Invoke(obj);
+    }
 
-    private void OnAttackPerformed(InputAction.CallbackContext obj)
+    private void OnAttackPerformed(CallbackContext obj)
     {
         OnAttackPlayerInputPerformed?.Invoke(obj);
     }
 
-    private void OnRunStarted(InputAction.CallbackContext obj)
+    private void OnRunStarted(CallbackContext obj)
     {
         OnRunPlayerInputStarted?.Invoke(obj);
     }
-    private void OnRunCanceled(InputAction.CallbackContext obj)
+    private void OnRunCanceled(CallbackContext obj)
     {
         OnRunPlayerInputCanceled?.Invoke(obj);
     }
 
-    private void OnInteractPerformed(InputAction.CallbackContext obj)
+    private void OnInteractPerformed(CallbackContext obj)
     {
         OnInteractPlayerInputPerformed?.Invoke(obj);
     }
 
-    private void OnJumpPerformed(InputAction.CallbackContext obj)
+    private void OnJumpPerformed(CallbackContext obj)
     {
         OnJumpPlayerInputPerformed?.Invoke(obj);
     }
 
-    private void OnMovePerformed(InputAction.CallbackContext context)
+    private void OnMovePerformed(CallbackContext context)
     {
         OnMovePlayerInputPerformed?.Invoke(context);
     }
@@ -79,6 +88,7 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Run.started -= OnRunStarted;
         _playerInputAction.Player.Run.canceled -= OnRunCanceled;
         _playerInputAction.Player.Attack.performed -= OnAttackPerformed;
+        _playerInputAction.Player.AlternativeAttack.performed -= OnAlternativeAttackPerformed;
         _playerInputAction.Dispose();
     }
 }
