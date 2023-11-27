@@ -18,9 +18,11 @@ public class PlayerInputSystem: IDisposable
     public event Action<InputAction.CallbackContext> OnInteractPlayerInputPerformed;
 
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
+    public event Action<InputAction.CallbackContext> OnAttackPlayerInputStarted;
+    public event Action<InputAction.CallbackContext> OnAttackPlayerInputCanceled;
 
     [Inject]
-    public void Construct(PlayerMovementModel playerMovementModel, PlayerInputSystem playerInputSystem)
+    public void Construct()
     {
         _playerInputAction = new PlayerInputAction();
         _playerInputAction.Player.Enable();
@@ -31,6 +33,18 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
         _playerInputAction.Player.MeleeWeapon.performed += OnMeleeWeaponAttackPerformed;
+        _playerInputAction.Player.MeleeWeapon.started += OnMeleeWeaponAttackStarted;
+        _playerInputAction.Player.MeleeWeapon.canceled += OnMeleeWeaponAttackCanceled;
+    }
+
+    private void OnMeleeWeaponAttackCanceled(InputAction.CallbackContext obj)
+    {
+        OnAttackPlayerInputCanceled?.Invoke(obj);
+    }
+
+    private void OnMeleeWeaponAttackStarted(InputAction.CallbackContext obj)
+    {
+        OnAttackPlayerInputStarted?.Invoke(obj);
     }
 
     private void OnMeleeWeaponAttackPerformed(InputAction.CallbackContext obj)
