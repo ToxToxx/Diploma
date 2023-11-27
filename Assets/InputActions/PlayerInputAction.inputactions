@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MeleeWeapon",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "6d1a9564-b1bb-4c60-bf45-ea1334db5a7b",
                     "expectedControlType": "Button",
@@ -147,7 +147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MeleeWeapon",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -18,8 +18,7 @@ public class PlayerInputSystem: IDisposable
     public event Action<InputAction.CallbackContext> OnInteractPlayerInputPerformed;
 
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
-    public event Action<InputAction.CallbackContext> OnAttackPlayerInputStarted;
-    public event Action<InputAction.CallbackContext> OnAttackPlayerInputCanceled;
+
 
     [Inject]
     public void Construct()
@@ -32,22 +31,12 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Interact.performed += OnInteractPerformed;
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
-        _playerInputAction.Player.MeleeWeapon.performed += OnMeleeWeaponAttackPerformed;
-        _playerInputAction.Player.MeleeWeapon.started += OnMeleeWeaponAttackStarted;
-        _playerInputAction.Player.MeleeWeapon.canceled += OnMeleeWeaponAttackCanceled;
+        _playerInputAction.Player.Attack.performed += OnAttackPerformed;
+
     }
 
-    private void OnMeleeWeaponAttackCanceled(InputAction.CallbackContext obj)
-    {
-        OnAttackPlayerInputCanceled?.Invoke(obj);
-    }
 
-    private void OnMeleeWeaponAttackStarted(InputAction.CallbackContext obj)
-    {
-        OnAttackPlayerInputStarted?.Invoke(obj);
-    }
-
-    private void OnMeleeWeaponAttackPerformed(InputAction.CallbackContext obj)
+    private void OnAttackPerformed(InputAction.CallbackContext obj)
     {
         OnAttackPlayerInputPerformed?.Invoke(obj);
     }
@@ -89,7 +78,7 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Interact.performed -= OnInteractPerformed;
         _playerInputAction.Player.Run.started -= OnRunStarted;
         _playerInputAction.Player.Run.canceled -= OnRunCanceled;
-        _playerInputAction.Player.MeleeWeapon.performed -= OnMeleeWeaponAttackPerformed;
+        _playerInputAction.Player.Attack.performed -= OnAttackPerformed;
         _playerInputAction.Dispose();
     }
 }
