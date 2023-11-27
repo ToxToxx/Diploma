@@ -8,6 +8,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
 {
     [SerializeField] private MeleeWeaponConfig _meleeWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
+    [SerializeField] private Transform _playerTransform;
 
     private IMeleeWeapon _meleeWeaponModel;
     private MeleeWeaponTypeController _meleeWeaponTypeController;
@@ -60,60 +61,45 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
         yield return new WaitForSeconds(AttackSpeedCoef / _meleeWeaponModel.AttackSpeed);
         canAttack = true;
     }
-
     private void PerformAttack()
     {
-        if (IsFacingEnemy())
-        {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+        Vector2 attackPosition = DetermineTheAttackDirection();
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition, _meleeWeaponModel.AttackDistance, _enemyMask);
 
-            foreach (var enemy in enemiesToDamage)
+        foreach (var enemy in enemiesToDamage)
+        {
+            if (enemy.GetComponent<EnemyHealthController>())
             {
-                if (enemy.GetComponent<EnemyHealthController>())
-                {
-                    enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
-                }
+                enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage);
             }
         }
     }
 
     private void PerformAlternativeAttack()
     {
-        if (IsFacingEnemy())
-        {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
+        Vector2 attackPosition = DetermineTheAttackDirection();
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition, _meleeWeaponModel.AttackDistance, _enemyMask);
 
-            foreach (var enemy in enemiesToDamage)
+        foreach (var enemy in enemiesToDamage)
+        {
+            if (enemy.GetComponent<EnemyHealthController>())
             {
-                if (enemy.GetComponent<EnemyHealthController>())
-                {
-                    enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage * _meleeWeaponModel.AlternativeAttackCritDamage);
-                }
+                enemy.GetComponent<EnemyHealthController>().TakeDamage(_meleeWeaponModel.AttackDamage * _meleeWeaponModel.AlternativeAttackCritDamage);
             }
         }
     }
 
-    private bool IsFacingEnemy()
+    private Vector2 DetermineTheAttackDirection()
     {
-        bool isFacingRight = transform.localScale.x > 0;
-
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _meleeWeaponModel.AttackDistance, _enemyMask);
-
-        foreach (var enemy in enemies)
-        {
-            Vector2 directionToEnemy = enemy.transform.position - transform.position;
-
-            if ((isFacingRight && directionToEnemy.x > 0) || (!isFacingRight && directionToEnemy.x < 0))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        float attackDirectionX = _playerTransform.localScale.x;
+        Vector2 attackPosition = (Vector2)_playerTransform.position + new Vector2(attackDirectionX, 0) * _meleeWeaponModel.AttackDistance;
+        return attackPosition;
     }
 
     public void Dispose()
     {
         _playerInputSystem.OnAttackPlayerInputPerformed -= OnMeleeWeaponAttackPerformed;
     }
+
+
 }
