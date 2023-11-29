@@ -96,6 +96,11 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
         return attackPosition;
     }
 
+
+    public MeleeWeaponConfig GetMeleeWeaponConfig()
+    {
+        return _meleeWeaponConfig;
+    }
     public void Dispose()
     {
         _playerInputSystem.OnAttackPlayerInputPerformed -= OnMeleeWeaponAttackPerformed;
