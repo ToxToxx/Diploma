@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class MeleeWeaponController : MonoBehaviour, IDisposable
+public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponController
 {
     [SerializeField] private MeleeWeaponConfig _meleeWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
@@ -61,7 +61,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
         yield return new WaitForSeconds(AttackSpeedCoef / _meleeWeaponModel.AttackSpeed);
         canAttack = true;
     }
-    private void PerformAttack()
+    public void PerformAttack()
     {
         Vector2 attackPosition = DetermineTheAttackDirection();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition, _meleeWeaponModel.AttackDistance, _enemyMask);
@@ -75,7 +75,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable
         }
     }
 
-    private void PerformAlternativeAttack()
+    public void PerformAlternativeAttack()
     {
         Vector2 attackPosition = DetermineTheAttackDirection();
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPosition, _meleeWeaponModel.AttackDistance, _enemyMask);
