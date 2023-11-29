@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class RangedWeaponController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float offset;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Vector3 shootingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotZ = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);
     }
 }

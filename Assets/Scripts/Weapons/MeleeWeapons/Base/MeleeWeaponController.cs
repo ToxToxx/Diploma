@@ -9,6 +9,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
     [SerializeField] private MeleeWeaponConfig _meleeWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private bool isWeaponAcitive = false;
 
     private IMeleeWeapon _meleeWeaponModel;
     private MeleeWeaponTypeController _meleeWeaponTypeController;
@@ -37,7 +38,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
 
     private void OnMeleeWeaponAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack)
+        if (canAttack && isWeaponAcitive)
         {
             StartCoroutine(AttackCooldown());
             PerformAttack();
@@ -46,7 +47,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
 
     private void OnMeleeWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost)
+        if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost && isWeaponAcitive)
         {
             _playerStaminaAndRunController.DecreaseStaminaOnAmount(_meleeWeaponModel.AlternativeAttackStaminaCost);
 
