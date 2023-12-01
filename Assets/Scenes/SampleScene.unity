@@ -1906,7 +1906,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723dab52cc144a84db937c4c2078a089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: -90
+  _rangedWeaponConfig: {fileID: 11400000, guid: f61acb8d11c710446b11ea22f837e4e2, type: 2}
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _playerTransform: {fileID: 479021697}
+  isWeaponActive: 1
 --- !u!1 &751948784
 GameObject:
   m_ObjectHideFlags: 0

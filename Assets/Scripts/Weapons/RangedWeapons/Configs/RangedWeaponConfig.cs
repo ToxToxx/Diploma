@@ -7,9 +7,11 @@ public class RangedWeaponConfig : ScriptableObject
 {
     public float RangedWeaponDamage;
     public float FireRate;
+    public int CurrentAmmo;
     public int MaxAmmo;
     public float ReloadTime;
     public bool IsScoped;
-    public Transform firePoint;
-    public GameObject projectilePrefab;
+    public GameObject ProjectilePrefab;
+    public float ProjectileSpeed;
+    public float ProjectileDestroyingTime;
 }
