@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class RangedWeaponModel : MonoBehaviour, IRangedWeaponModel
 {
@@ -13,8 +14,19 @@ public class RangedWeaponModel : MonoBehaviour, IRangedWeaponModel
     private int currentAmmo;
     private bool isReloading = false;
 
-    public Transform firePoint;
-    public GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject projectilePrefab;
+
+
+    [Inject]
+    public void Construct(RangedWeaponConfig rangedWeaponConfig)
+    {
+        RangedWeaponDamage = rangedWeaponConfig.RangedWeaponDamage;
+        FireRate = rangedWeaponConfig.FireRate;
+        MaxAmmo = rangedWeaponConfig.MaxAmmo;
+        ReloadTime = rangedWeaponConfig.ReloadTime;
+        IsScoped = rangedWeaponConfig.IsScoped;
+    }
 
     private void Start()
     {
@@ -25,25 +37,19 @@ public class RangedWeaponModel : MonoBehaviour, IRangedWeaponModel
     {
         if (currentAmmo > 0 && !isReloading)
         {
-            // Instantiate a projectile and set its properties
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             ProjectileModel projectileModel = projectile.GetComponent<ProjectileModel>();
             projectileModel.SetDamage(RangedWeaponDamage);
 
             currentAmmo--;
 
-            // Visual and audio feedback for shooting
-            // ...
-
             if (currentAmmo <= 0)
             {
-                // Auto-reload or provide feedback to the player
                 Reload();
             }
         }
         else if (currentAmmo <= 0 && !isReloading)
         {
-            // Auto-reload or provide feedback to the player
             Reload();
         }
     }
@@ -53,10 +59,6 @@ public class RangedWeaponModel : MonoBehaviour, IRangedWeaponModel
         if (!isReloading)
         {
             isReloading = true;
-
-            // Visual and audio feedback for reloading
-            // ...
-
             Invoke(nameof(FinishReload), ReloadTime);
         }
     }
@@ -69,10 +71,6 @@ public class RangedWeaponModel : MonoBehaviour, IRangedWeaponModel
 
     public void ToggleScope(bool isScoped)
     {
-        // Logic for enabling/disabling scope
         this.IsScoped = isScoped;
-
-        // Visual and audio feedback for toggling scope
-        // ...
     }
 }
