@@ -7,7 +7,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
 {
     [SerializeField] private RangedWeaponConfig _rangedWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
-    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private Transform _rangedWeaponTransform;
     [SerializeField] private bool isWeaponActive = false;
 
     private IRangedWeaponModel _rangedWeaponModel;
@@ -55,16 +55,18 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     {
         if (attackCooldown <= 0f && _rangedWeaponModel.CurrentAmmo > 0)
         {
-            GameObject projectile = Instantiate(_rangedWeaponModel.ProjectilePrefab, _playerTransform.position, Quaternion.identity);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
+            Vector2 direction = (mousePosition - transform.position).normalized;
+            GameObject projectile = Instantiate(_rangedWeaponModel.ProjectilePrefab, _rangedWeaponTransform.position, Quaternion.identity);
             ProjectileModel projectileModel = projectile.GetComponent<ProjectileModel>();
 
             projectileModel.SetDamage(_rangedWeaponModel.RangedWeaponDamage);
             projectileModel.SetSpeed(_rangedWeaponModel.ProjectileSpeed);
             projectileModel.SetDestroyingTime(_rangedWeaponModel.ProjectileDestroyingTime);
 
-            Vector2 shootDirection = _playerTransform.localScale.x > 0 ? Vector2.right : Vector2.left;
-            projectileModel.SetShootDirection(shootDirection);
-            projectile.GetComponent<Rigidbody2D>().velocity = _rangedWeaponModel.ProjectileSpeed * Time.deltaTime * shootDirection;
+            projectile.GetComponent<Rigidbody2D>().velocity = direction * _rangedWeaponModel.ProjectileSpeed;
+            projectileModel.SetShootDirection(direction);
 
             _rangedWeaponModel.CurrentAmmo--;
             attackCooldown = 1f / _rangedWeaponModel.FireRate;
@@ -75,6 +77,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
             }
         }
     }
+
 
     public void PerformAlternativeAttack()
     {

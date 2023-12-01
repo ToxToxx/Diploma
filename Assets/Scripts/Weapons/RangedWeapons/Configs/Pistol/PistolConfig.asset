@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PistolConfig
   m_EditorClassIdentifier: 
   RangedWeaponDamage: 5
-  FireRate: 1
+  FireRate: 4
   CurrentAmmo: 0
   MaxAmmo: 10
   ReloadTime: 2
   IsScoped: 0
   ProjectilePrefab: {fileID: 544996983194476828, guid: 308a4e24e9cf1424cb011b5c7c770e97, type: 3}
-  ProjectileSpeed: 5
-  ProjectileDestroyingTime: 2
+  ProjectileSpeed: 25
+  ProjectileDestroyingTime: 1
