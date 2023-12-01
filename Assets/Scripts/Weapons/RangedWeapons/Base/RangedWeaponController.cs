@@ -4,12 +4,39 @@ using UnityEngine;
 
 public class RangedWeaponController : MonoBehaviour
 {
-    [SerializeField] private float offset;
+    private RangedWeaponModel _rangedWeaponModel;
+   // private WeaponView weaponView;
+
+    private float _nextFireTime = 0f;
+
+    private void Start()
+    {
+        _rangedWeaponModel = GetComponent<RangedWeaponModel>();
+        //weaponView = GetComponent<WeaponView>();
+    }
 
     private void Update()
     {
-        Vector3 shootingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotZ = Mathf.Atan2(shootingDirection.y, shootingDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);
+        if (Input.GetButtonDown("Fire1") && Time.time >= _nextFireTime)
+        {
+            Shoot();
+            _nextFireTime = Time.time + 1f / _rangedWeaponModel.FireRate;
+        }
+
+        if (Input.GetButtonDown("Reload"))
+        {
+            _rangedWeaponModel.Reload();
+        }
+
+        if (Input.GetButtonDown("ToggleScope"))
+        {
+            _rangedWeaponModel.ToggleScope(!_rangedWeaponModel.IsScoped);
+        }
+    }
+
+    private void Shoot()
+    {
+        _rangedWeaponModel.Shoot();
+       // weaponView.PlayShootAnimation();
     }
 }

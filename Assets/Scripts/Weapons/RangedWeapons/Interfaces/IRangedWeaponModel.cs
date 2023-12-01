@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IRangedWeaponModel
 {
     public void Shoot();
+    public void Reload();
 }
