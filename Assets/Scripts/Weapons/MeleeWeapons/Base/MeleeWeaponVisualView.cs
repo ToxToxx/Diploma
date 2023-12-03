@@ -14,6 +14,14 @@ public class MeleeWeaponVisualView : MonoBehaviour
     }
     private void Update()
     {
+        if(_meleeWeaponController.GetWeaponIsActive() == false)
+        {
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+        } else
+        {
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            
+        }
         _spriteRenderer.sprite = _meleeWeaponController.GetMeleeWeaponConfig().MeleeWeaponSprite;
     }
 }

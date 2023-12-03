@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class RangedWeaponVisualView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private RangedWeaponController _rangedWeaponController;
+    [SerializeField] private RangedWeaponVisualView _rangedWeaponVisualView;
 
-    // Update is called once per frame
-    void Update()
+    private SpriteRenderer _spriteRenderer;
+    private void Awake()
     {
-        
+        _spriteRenderer = _rangedWeaponVisualView.GetComponent<SpriteRenderer>();
+    }
+    private void Update()
+    {
+        if (_rangedWeaponController.GetWeaponIsActive() == false)
+        {
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+        }
+        else
+        {
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+
+        }
+        _spriteRenderer.sprite = _rangedWeaponController.GetRangedWeaponConfig().RangedWeaponSprite;
     }
 }

@@ -8,7 +8,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     [SerializeField] private RangedWeaponConfig _rangedWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private Transform _rangedWeaponTransform;
-    [SerializeField] private bool isWeaponActive = false;
+    [SerializeField] private bool _isRangedWeaponActive = false;
 
     private IRangedWeaponModel _rangedWeaponModel;
 
@@ -37,7 +37,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
 
     private void OnRangedWeaponAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && isWeaponActive)
+        if (canAttack && _isRangedWeaponActive)
         {
             PerformAttack();
         }
@@ -45,7 +45,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
 
     private void OnRangedWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && isWeaponActive)
+        if (canAttack && _isRangedWeaponActive)
         {
             PerformAlternativeAttack();
         }
@@ -102,7 +102,10 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     {
         return _rangedWeaponConfig;
     }
-
+    public bool GetWeaponIsActive()
+    {
+        return _isRangedWeaponActive;
+    }
     public void Dispose()
     {
         _playerInputSystem.OnAttackPlayerInputPerformed -= OnRangedWeaponAttackPerformed;
