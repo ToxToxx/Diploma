@@ -9,7 +9,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
     [SerializeField] private MeleeWeaponConfig _meleeWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private Transform _playerTransform;
-    [SerializeField] private bool _isMeleeWeaponActive = false;
+    private SwitchItemController _switchItemController;
 
     private IMeleeWeapon _meleeWeaponModel;
     private MeleeWeaponTypeController _meleeWeaponTypeController;
@@ -21,7 +21,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
     private float AttackSpeedCoef = 1.0f;
 
     [Inject]
-    public void Construct(PlayerInputSystem playerInputSystem, PlayerStaminaAndRunController playerStaminaAndRunController)
+    public void Construct(PlayerInputSystem playerInputSystem, PlayerStaminaAndRunController playerStaminaAndRunController, SwitchItemController switchItemController)
     {
         _playerInputSystem = playerInputSystem;
         _playerInputSystem.OnAttackPlayerInputPerformed += OnMeleeWeaponAttackPerformed;
@@ -38,7 +38,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
 
     private void OnMeleeWeaponAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && _isMeleeWeaponActive)
+        if (canAttack && _switchItemController.GetCurrentItemState() == CurrentItemStateModel.CurrentItemState.Primary)
         {
             StartCoroutine(AttackCooldown());
             PerformAttack();
@@ -47,7 +47,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
 
     private void OnMeleeWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost && _isMeleeWeaponActive)
+        if (canAttack && _playerStaminaAndRunController.GetCurrentStamina() >= _meleeWeaponModel.AlternativeAttackStaminaCost && _switchItemController.GetCurrentItemState() == CurrentItemStateModel.CurrentItemState.Primary)
         {
             _playerStaminaAndRunController.DecreaseStaminaOnAmount(_meleeWeaponModel.AlternativeAttackStaminaCost);
 
@@ -97,14 +97,9 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
         return attackPosition;
     }
 
-
     public MeleeWeaponConfig GetMeleeWeaponConfig()
     {
         return _meleeWeaponConfig;
-    }
-    public bool GetWeaponIsActive()
-    {
-        return _isMeleeWeaponActive;
     }
     public void Dispose()
     {

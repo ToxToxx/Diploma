@@ -9,6 +9,7 @@ public class PlayerInstaller : Installer
        BindPlayerHealth();
        BindPlayerMovement();
        BindPlayerRunning();
+       BindPlayerSwitchController();
     }
 
     private void BindPlayerHealth()
@@ -35,5 +36,10 @@ public class PlayerInstaller : Installer
     private void BindPlayerInput()
     {
         Container.Bind<PlayerInputSystem>().AsSingle().NonLazy();
+    }
+
+    private void BindPlayerSwitchController()
+    {
+        Container.Bind<SwitchItemController>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

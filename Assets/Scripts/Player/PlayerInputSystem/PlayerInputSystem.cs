@@ -21,6 +21,7 @@ public class PlayerInputSystem: IDisposable
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
     public event Action<InputAction.CallbackContext> OnAlternativeAttackPlayerInputPerformed;
 
+    public event Action<int> OnSwitchItemPerformed;
 
     [Inject]
     public void Construct()
@@ -37,6 +38,8 @@ public class PlayerInputSystem: IDisposable
 
         _playerInputAction.Player.Attack.performed += OnAttackPerformed;
         _playerInputAction.Player.AlternativeAttack.performed += OnAlternativeAttackPerformed;
+
+        _playerInputAction.Player.SwitchItem.performed += ctx => HandleNumberInput(ctx.control);
 
     }
 
@@ -78,7 +81,16 @@ public class PlayerInputSystem: IDisposable
     {
         return _playerInputAction;
     }
+    private void HandleNumberInput(InputControl control)
+    {
 
+        string key = control.displayName;
+        if (int.TryParse(key, out int index))
+        {
+            OnSwitchItemPerformed?.Invoke(index);
+        }
+
+    }
 
     public void Dispose()
     {
