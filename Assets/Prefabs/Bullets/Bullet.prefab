@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 733374715878398017}
   - component: {fileID: 201204639264873834}
   - component: {fileID: 8740366866785879844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b9ffa5206e085468ab151de959d96b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 5
 --- !u!50 &201204639264873834
 Rigidbody2D:
   serializedVersion: 4
@@ -120,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 325889950330669709}
   - component: {fileID: 4971989961865604298}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BulletVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

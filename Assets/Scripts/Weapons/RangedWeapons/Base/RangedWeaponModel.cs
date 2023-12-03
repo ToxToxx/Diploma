@@ -7,6 +7,7 @@ using Zenject;
 public class RangedWeaponModel : IRangedWeaponModel
 {
     public float RangedWeaponDamage { get; set; }
+    public float CritMultiplier { get; set; } 
     public float FireRate { get; set; }
     public int CurrentAmmo { get; set; }
     public int MaxAmmo { get; set; }
@@ -23,6 +24,7 @@ public class RangedWeaponModel : IRangedWeaponModel
     public RangedWeaponModel(RangedWeaponConfig rangedWeaponConfig)
     {
         RangedWeaponDamage = rangedWeaponConfig.RangedWeaponDamage;
+        CritMultiplier = rangedWeaponConfig.CritMultiplier;
         FireRate = rangedWeaponConfig.FireRate;
         MaxAmmo = rangedWeaponConfig.MaxAmmo;
         ReloadTime = rangedWeaponConfig.ReloadTime;

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RangedWeaponConfig : ScriptableObject
 {
     public float RangedWeaponDamage;
+    public float CritMultiplier;
     public float FireRate;
     public int CurrentAmmo;
     public int MaxAmmo;

@@ -61,12 +61,15 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
             GameObject projectile = Instantiate(_rangedWeaponModel.ProjectilePrefab, _rangedWeaponTransform.position, Quaternion.identity);
             ProjectileModel projectileModel = projectile.GetComponent<ProjectileModel>();
 
-            projectileModel.SetDamage(_rangedWeaponModel.RangedWeaponDamage);
-            projectileModel.SetSpeed(_rangedWeaponModel.ProjectileSpeed);
-            projectileModel.SetDestroyingTime(_rangedWeaponModel.ProjectileDestroyingTime);
+            projectileModel.Initialize(
+                _rangedWeaponModel.RangedWeaponDamage,
+                _rangedWeaponModel.CritMultiplier,
+                _rangedWeaponModel.ProjectileSpeed,
+                _rangedWeaponModel.ProjectileDestroyingTime,
+                direction
+            );
 
             projectile.GetComponent<Rigidbody2D>().velocity = direction * _rangedWeaponModel.ProjectileSpeed;
-            projectileModel.SetShootDirection(direction);
 
             _rangedWeaponModel.CurrentAmmo--;
             attackCooldown = 1f / _rangedWeaponModel.FireRate;

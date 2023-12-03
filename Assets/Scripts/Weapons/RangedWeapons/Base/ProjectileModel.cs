@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ProjectileModel : MonoBehaviour
 {
+    private const string ENEMY_LAYER = "Enemy";
+    private const string PLAYER_LAYER = "Player";
+
     private float _projectileDamage;
     private float _projectileSpeed;
     private float _destroyingTime;
     private Vector2 _shootDirection;
+
+    private float _critMultiplier;
 
     private void Start()
     { 
@@ -17,7 +22,12 @@ public class ProjectileModel : MonoBehaviour
     public void SetDamage(float newDamage)
     {
         _projectileDamage = newDamage;
-    }    
+    }  
+
+    public void SetCritMultiplier(float critMultiplier)
+    {
+        _critMultiplier = critMultiplier;
+    }
     public void SetSpeed(float projectileSpeed)
     {
         _projectileSpeed = projectileSpeed;
@@ -31,6 +41,14 @@ public class ProjectileModel : MonoBehaviour
     {
         _shootDirection = direction;
     }
+    public void Initialize(float damage, float critMultiplier, float speed, float destroyingTime, Vector2 shootDirection)
+    {
+        SetDamage(damage);
+        SetCritMultiplier(critMultiplier);
+        SetSpeed(speed);
+        SetDestroyingTime(destroyingTime);
+        SetShootDirection(shootDirection);
+    }
 
     private void Update()
     {
@@ -39,18 +57,28 @@ public class ProjectileModel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<EnemyHealthController>())
+        if (collision.gameObject.layer == LayerMask.NameToLayer(ENEMY_LAYER))
         {
             if (collision.TryGetComponent<EnemyHealthController>(out var enemyModel))
             {
-                enemyModel.TakeDamage(_projectileDamage);
+                float totalDamage = _projectileDamage;
+                enemyModel.TakeDamage(totalDamage);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
-        else if (collision.gameObject.layer != LayerMask.NameToLayer("Player"))
+        else if (collision.gameObject.layer != LayerMask.NameToLayer(PLAYER_LAYER))
         {
             Destroy(gameObject);
         }
+    }
+
+    public float GetDamage()
+    {
+        return _projectileDamage;
+    }
+    public float GetCritMultiplier()
+    {
+        return _critMultiplier;
     }
 }
 

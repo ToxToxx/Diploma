@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public interface IRangedWeaponModel
 {
     public float RangedWeaponDamage { get; set; }
+    public float CritMultiplier { get; set; }
     public float FireRate { get; set; }
     public int CurrentAmmo { get; set; }
     public int MaxAmmo { get; set; }
