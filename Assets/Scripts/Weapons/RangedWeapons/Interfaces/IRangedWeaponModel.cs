@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface IRangedWeaponModel
 {
@@ -13,4 +14,8 @@ public interface IRangedWeaponModel
     public GameObject ProjectilePrefab { get; set; }
     public float ProjectileSpeed { get; set; }
     public float ProjectileDestroyingTime { get; set; }
+
+    public Sprite RangedWeaponSprite { get; set; }
+    public Image RangedWeaponIcon { get; set; }
+    public string RangedWeaponDescription { get; set; }
 }

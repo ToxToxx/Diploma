@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "MeleeWeaponConfig", menuName = "Configs/WeaponConfig/RangedWeaponConfig")]
 public class RangedWeaponConfig : ScriptableObject
@@ -14,4 +15,8 @@ public class RangedWeaponConfig : ScriptableObject
     public GameObject ProjectilePrefab;
     public float ProjectileSpeed;
     public float ProjectileDestroyingTime;
+
+    public Sprite RangedWeaponSprite;
+    public Image RangedWeaponIcon;
+    public string RangedWeaponDescription;
 }
