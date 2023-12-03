@@ -80,6 +80,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchItem"",
+                    ""type"": ""Value"",
+                    ""id"": ""2fd1d1af-e862-43d5-b360-f0c99145885e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -206,6 +215,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_AlternativeAttack = m_Player.FindAction("AlternativeAttack", throwIfNotFound: true);
+        m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +283,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_AlternativeAttack;
+    private readonly InputAction m_Player_SwitchItem;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -283,6 +294,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @AlternativeAttack => m_Wrapper.m_Player_AlternativeAttack;
+        public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +322,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AlternativeAttack.started += instance.OnAlternativeAttack;
             @AlternativeAttack.performed += instance.OnAlternativeAttack;
             @AlternativeAttack.canceled += instance.OnAlternativeAttack;
+            @SwitchItem.started += instance.OnSwitchItem;
+            @SwitchItem.performed += instance.OnSwitchItem;
+            @SwitchItem.canceled += instance.OnSwitchItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -332,6 +347,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @AlternativeAttack.started -= instance.OnAlternativeAttack;
             @AlternativeAttack.performed -= instance.OnAlternativeAttack;
             @AlternativeAttack.canceled -= instance.OnAlternativeAttack;
+            @SwitchItem.started -= instance.OnSwitchItem;
+            @SwitchItem.performed -= instance.OnSwitchItem;
+            @SwitchItem.canceled -= instance.OnSwitchItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -357,5 +375,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAlternativeAttack(InputAction.CallbackContext context);
+        void OnSwitchItem(InputAction.CallbackContext context);
     }
 }
