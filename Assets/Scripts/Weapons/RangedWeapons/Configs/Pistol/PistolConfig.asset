@@ -21,3 +21,8 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 544996983194476828, guid: 308a4e24e9cf1424cb011b5c7c770e97, type: 3}
   ProjectileSpeed: 25
   ProjectileDestroyingTime: 1
+  RangedWeaponSprite: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+  RangedWeaponIcon: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+  RangedWeaponDescription: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442
+    \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0435\u0449\u0451 \u043C\u043E\u0436\u0435\u0442
+    \u0441\u043F\u0430\u0441\u0442\u0438 \u0436\u0438\u0437\u043D\u044C"
