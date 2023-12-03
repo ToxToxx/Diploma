@@ -11,9 +11,9 @@ public class MeleeWeaponInventoryFirstView : MonoBehaviour
 
     private void Update()
     {
-        if (_meleeWeaponController.GetMeleeWeaponConfig().WeaponSprite != null)
+        if (_meleeWeaponController.GetMeleeWeaponConfig().MeleeWeaponIcon != null)
         {
-            _meleeWeaponImage.sprite = _meleeWeaponController.GetMeleeWeaponConfig().WeaponSprite;
+            _meleeWeaponImage.sprite = _meleeWeaponController.GetMeleeWeaponConfig().MeleeWeaponIcon;
         }
     }
 

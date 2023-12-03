@@ -17,6 +17,6 @@ public class RangedWeaponConfig : ScriptableObject
     public float ProjectileDestroyingTime;
 
     public Sprite RangedWeaponSprite;
-    public Image RangedWeaponIcon;
+    public Sprite RangedWeaponIcon;
     public string RangedWeaponDescription;
 }

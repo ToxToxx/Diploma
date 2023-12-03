@@ -24,8 +24,8 @@ public class MeleeWeaponModel : IMeleeWeapon
         AttackDistance = meleeWeaponConfig.AttackDistance;
         AlternativeAttackStaminaCost = meleeWeaponConfig.AlternativeAttackStaminaCost; 
 
-        WeaponImage = meleeWeaponConfig.WeaponImage;
-        WeaponSprite = meleeWeaponConfig.WeaponSprite;
+        WeaponImage = meleeWeaponConfig.MeleeWeaponIcon;
+        WeaponSprite = meleeWeaponConfig.MeleeWeaponSprite;
         WeaponDescription = meleeWeaponConfig.WeaponDescription;
     }
 }

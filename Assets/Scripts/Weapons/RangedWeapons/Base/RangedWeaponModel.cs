@@ -17,7 +17,7 @@ public class RangedWeaponModel : IRangedWeaponModel
     public float ProjectileDestroyingTime { get; set; }
 
     public Sprite RangedWeaponSprite { get; set; }
-    public Image RangedWeaponIcon { get; set; }
+    public Sprite RangedWeaponIcon { get; set; }
     public string RangedWeaponDescription { get; set; }
 
     public RangedWeaponModel(RangedWeaponConfig rangedWeaponConfig)
