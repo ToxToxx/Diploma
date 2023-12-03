@@ -38,7 +38,6 @@ public class SwitchItemController : MonoBehaviour
                 _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.ThirdUsableItem;
                 break;
         }
-        Debug.Log(obj);
     }
 
     public CurrentItemStateModel.CurrentItemState GetCurrentItemState()

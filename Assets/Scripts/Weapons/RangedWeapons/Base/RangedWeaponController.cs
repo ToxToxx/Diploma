@@ -8,7 +8,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     [SerializeField] private RangedWeaponConfig _rangedWeaponConfig;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private Transform _rangedWeaponTransform;
-    [SerializeField] private bool _isRangedWeaponActive = false;
+    private SwitchItemController _switchItemController;
 
     private IRangedWeaponModel _rangedWeaponModel;
 
@@ -17,9 +17,10 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     private float attackCooldown = 0f;
 
     [Inject]
-    public void Construct(PlayerInputSystem playerInputSystem)
+    public void Construct(PlayerInputSystem playerInputSystem, SwitchItemController switchItemController)
     {
         _playerInputSystem = playerInputSystem;
+        _switchItemController = switchItemController;
         _playerInputSystem.OnAttackPlayerInputPerformed += OnRangedWeaponAttackPerformed;
         _playerInputSystem.OnAlternativeAttackPlayerInputPerformed += OnRangedWeaponAlternativeAttackPerformed;
     }
@@ -37,7 +38,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
 
     private void OnRangedWeaponAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && _isRangedWeaponActive)
+        if (canAttack && _switchItemController.GetCurrentItemState() == CurrentItemStateModel.CurrentItemState.Secondary)
         {
             PerformAttack();
         }
@@ -45,7 +46,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
 
     private void OnRangedWeaponAlternativeAttackPerformed(InputAction.CallbackContext obj)
     {
-        if (canAttack && _isRangedWeaponActive)
+        if (canAttack && _switchItemController.GetCurrentItemState() == CurrentItemStateModel.CurrentItemState.Secondary)
         {
             PerformAlternativeAttack();
         }
@@ -102,10 +103,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     {
         return _rangedWeaponConfig;
     }
-    public bool GetWeaponIsActive()
-    {
-        return _isRangedWeaponActive;
-    }
+
     public void Dispose()
     {
         _playerInputSystem.OnAttackPlayerInputPerformed -= OnRangedWeaponAttackPerformed;

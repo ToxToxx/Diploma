@@ -24,6 +24,7 @@ public class MeleeWeaponController : MonoBehaviour, IDisposable, IWeaponControll
     public void Construct(PlayerInputSystem playerInputSystem, PlayerStaminaAndRunController playerStaminaAndRunController, SwitchItemController switchItemController)
     {
         _playerInputSystem = playerInputSystem;
+        _switchItemController = switchItemController;
         _playerInputSystem.OnAttackPlayerInputPerformed += OnMeleeWeaponAttackPerformed;
         _playerInputSystem.OnAlternativeAttackPlayerInputPerformed += OnMeleeWeaponAlternativeAttackPerformed;
 

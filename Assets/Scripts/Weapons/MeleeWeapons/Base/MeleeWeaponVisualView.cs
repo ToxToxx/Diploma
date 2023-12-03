@@ -24,11 +24,10 @@ public class MeleeWeaponVisualView : MonoBehaviour
     {
         if(_switchItemController.GetCurrentItemState() == CurrentItemStateModel.CurrentItemState.Primary)
         {
-            _spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);     
         } else
         {
-            _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-            
+            _spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
         }
         _spriteRenderer.sprite = _meleeWeaponController.GetMeleeWeaponConfig().MeleeWeaponSprite;
     }
