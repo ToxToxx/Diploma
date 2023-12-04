@@ -18,7 +18,7 @@ MonoBehaviour:
   AttackDistance: 2
   AlternativeAttackCritDamage: 1.25
   AlternativeAttackStaminaCost: 20
-  MeleeWeaponIcon: {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
-  MeleeWeaponSprite: {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
+  MeleeWeaponIcon: {fileID: 21300000, guid: 06140cc248b05d2488fbb6493ce5fd11, type: 3}
+  MeleeWeaponSprite: {fileID: 21300000, guid: 06140cc248b05d2488fbb6493ce5fd11, type: 3}
   WeaponDescription: Knife
   Type: 0
