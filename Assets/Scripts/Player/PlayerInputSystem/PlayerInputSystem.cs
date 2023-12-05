@@ -38,7 +38,7 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
 
-        _playerInputAction.Player.Dodge.performed += OnDodgePerformed;
+        _playerInputAction.Player.Dodge.started += OnDodgePerformed;
 
         _playerInputAction.Player.Attack.performed += OnAttackPerformed;
         _playerInputAction.Player.AlternativeAttack.performed += OnAlternativeAttackPerformed;
@@ -108,8 +108,10 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Interact.performed -= OnInteractPerformed;
         _playerInputAction.Player.Run.started -= OnRunStarted;
         _playerInputAction.Player.Run.canceled -= OnRunCanceled;
+        _playerInputAction.Player.Dodge.performed -= OnDodgePerformed;
         _playerInputAction.Player.Attack.performed -= OnAttackPerformed;
         _playerInputAction.Player.AlternativeAttack.performed -= OnAlternativeAttackPerformed;
+        _playerInputAction.Player.SwitchItem.performed -= ctx => HandleNumberInput(ctx.control);
         _playerInputAction.Dispose();
     }
 }
