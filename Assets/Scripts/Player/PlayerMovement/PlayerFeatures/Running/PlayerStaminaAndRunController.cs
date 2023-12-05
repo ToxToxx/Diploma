@@ -7,7 +7,7 @@ using Zenject;
 
 public class PlayerStaminaAndRunController : MonoBehaviour, IDisposable, ITickable
 {
-    [SerializeField] private LayerMask _enemyLayerMask;
+
     private PlayerRunModel _playerRunModel;
     private PlayerMovementModel _playerMovementModel;
     private PlayerInputSystem _playerInputSystem;
@@ -50,8 +50,6 @@ public class PlayerStaminaAndRunController : MonoBehaviour, IDisposable, ITickab
         {
             _isRunning = true;
 
-            SetCollisionWithEnemies(!_isRunning);
-
             UpdatePlayerSpeed();
             OnPlayerRun?.Invoke(_isRunning);
         }
@@ -61,31 +59,6 @@ public class PlayerStaminaAndRunController : MonoBehaviour, IDisposable, ITickab
     {
         _isRunning = false;
         UpdatePlayerSpeed();
-        SetCollisionWithEnemies(!_isRunning);
-    }
-
-    private void SetCollisionWithEnemies(bool enableCollision)
-    {
-        if (_isRunning)
-        {
-            // Get all colliders of type Enemy using the provided enemyLayerMask
-            Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(transform.position, 1f, _enemyLayerMask);
-
-            // Enable or disable collision based on the parameter
-            foreach (Collider2D enemyCollider in enemyColliders)
-            {
-                // Check if either collider is a trigger
-                bool isTriggerCollision = GetComponent<Collider2D>().isTrigger || enemyCollider.isTrigger;
-
-                // Ignore collision only if both colliders are triggers
-                if (!isTriggerCollision)
-                {
-                    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemyCollider, !enableCollision);
-                }
-            }
-
-            Debug.Log($"Collision with enemies set to: {enableCollision}");
-        }
     }
 
     private void UpdatePlayerSpeed()

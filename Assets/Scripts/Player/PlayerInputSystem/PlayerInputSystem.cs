@@ -16,6 +16,8 @@ public class PlayerInputSystem: IDisposable
     public event Action<InputAction.CallbackContext> OnRunPlayerInputStarted;
     public event Action<InputAction.CallbackContext> OnRunPlayerInputCanceled;
 
+    public event Action<InputAction.CallbackContext> OnDodgePlayerInputPerformed;
+
     public event Action<InputAction.CallbackContext> OnInteractPlayerInputPerformed;
 
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
@@ -36,11 +38,18 @@ public class PlayerInputSystem: IDisposable
         _playerInputAction.Player.Run.started += OnRunStarted;
         _playerInputAction.Player.Run.canceled += OnRunCanceled;
 
+        _playerInputAction.Player.Dodge.performed += OnDodgePerformed;
+
         _playerInputAction.Player.Attack.performed += OnAttackPerformed;
         _playerInputAction.Player.AlternativeAttack.performed += OnAlternativeAttackPerformed;
 
         _playerInputAction.Player.SwitchItem.performed += ctx => HandleNumberInput(ctx.control);
 
+    }
+
+    private void OnDodgePerformed(CallbackContext obj)
+    {
+        OnDodgePlayerInputPerformed?.Invoke(obj);
     }
 
     private void OnAlternativeAttackPerformed(CallbackContext obj)
