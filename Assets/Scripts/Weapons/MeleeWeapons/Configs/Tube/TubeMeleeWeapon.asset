@@ -16,7 +16,7 @@ MonoBehaviour:
   AttackDamage: 15
   AttackSpeed: 0.5
   AttackDistance: 5
-  AlternativeAttackCritDamage: 2
+  AlternativeAttackCritDamage: 4.5
   AlternativeAttackStaminaCost: 40
   MeleeWeaponIcon: {fileID: 21300000, guid: 8708d80070522a043a1ab6a2b2775382, type: 3}
   MeleeWeaponSprite: {fileID: 21300000, guid: 8708d80070522a043a1ab6a2b2775382, type: 3}
