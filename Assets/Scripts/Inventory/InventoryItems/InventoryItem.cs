@@ -6,6 +6,6 @@ using UnityEngine;
 public class InventoryItem : ScriptableObject
 {
     public ScriptableObject InventoryItemConfig;
-    public bool IsCountable;
+    public bool IsStackable;
     public int Count;
 }
