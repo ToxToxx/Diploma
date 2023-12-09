@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerInventoryController : MonoBehaviour
 {
-    [SerializeField] private List<ScriptableObject> _playerInventory;
+    [SerializeField] private List<InventoryItem> _playerInventory;
     [SerializeField] private int _playerInventoryCount;
 
     private void Awake()
@@ -13,7 +13,7 @@ public class PlayerInventoryController : MonoBehaviour
         
     }
 
-    public void AddItem(ScriptableObject playerInventoryItem)
+    public void AddItem(InventoryItem playerInventoryItem)
     {
         if(_playerInventory.Count < _playerInventoryCount)
         {

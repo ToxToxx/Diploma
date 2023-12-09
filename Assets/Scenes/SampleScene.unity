@@ -1724,6 +1724,7 @@ GameObject:
   - component: {fileID: 479021704}
   - component: {fileID: 479021705}
   - component: {fileID: 479021706}
+  - component: {fileID: 479021707}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1893,6 +1894,20 @@ MonoBehaviour:
   _teleportDistance: 5
   _staminaDecreaseAmount: 20
   _playerTransform: {fileID: 479021697}
+--- !u!114 &479021707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479021696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f99d9e631a79a42ba323b74aca3259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInventory: []
+  _playerInventoryCount: 5
 --- !u!1 &490798178
 GameObject:
   m_ObjectHideFlags: 0
