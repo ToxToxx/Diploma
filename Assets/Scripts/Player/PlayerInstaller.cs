@@ -10,6 +10,7 @@ public class PlayerInstaller : Installer
        BindPlayerMovement();
        BindPlayerRunning();
        BindPlayerSwitchController();
+       BindPlayerInventory();
     }
 
     private void BindPlayerHealth()
@@ -41,5 +42,10 @@ public class PlayerInstaller : Installer
     private void BindPlayerSwitchController()
     {
         Container.Bind<SwitchItemController>().FromComponentInHierarchy().AsSingle().NonLazy();
+    }
+
+    private void BindPlayerInventory()
+    {
+        Container.Bind<PlayerInventoryController>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject.SpaceFighter;
 
-[CreateAssetMenu(fileName = "MeleeWeaponConfig", menuName = "Configs/WeaponConfig/RangedWeaponConfig")]
+[CreateAssetMenu(fileName = "RangedWeaponConfig", menuName = "Configs/WeaponConfig/RangedWeaponConfig")]
 public class RangedWeaponConfig : ScriptableObject
 {
     public float RangedWeaponDamage;
@@ -20,4 +21,6 @@ public class RangedWeaponConfig : ScriptableObject
     public Sprite RangedWeaponSprite;
     public Sprite RangedWeaponIcon;
     public string RangedWeaponDescription;
+
+    public AmmoType.RangedWeaponAmmoType RangedWeaponAmmoType;
 }

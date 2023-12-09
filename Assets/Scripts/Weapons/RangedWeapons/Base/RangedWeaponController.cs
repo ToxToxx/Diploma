@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     private PlayerInputSystem _playerInputSystem;
     private bool canAttack = true;
     private float attackCooldown = 0f;
+
+    public event Action<RangedWeaponConfig> OnReloading;
 
     [Inject]
     public void Construct(PlayerInputSystem playerInputSystem, SwitchItemController switchItemController)
@@ -95,8 +98,12 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
     {
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(_rangedWeaponModel.ReloadTime);
-        _rangedWeaponModel.CurrentAmmo = _rangedWeaponModel.MaxAmmo;
+        OnReloading?.Invoke(_rangedWeaponConfig);
         Debug.Log("Reload complete!");
+    }
+    public void ReloadWithAmmo(int amount)
+    {
+        _rangedWeaponModel.CurrentAmmo += amount;
     }
 
     public RangedWeaponConfig GetRangedWeaponConfig()
@@ -104,9 +111,16 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
         return _rangedWeaponConfig;
     }
 
+    public IRangedWeaponModel GetRangedWeaponModel()
+    {
+        return _rangedWeaponModel;
+    }
+
     public void Dispose()
     {
         _playerInputSystem.OnAttackPlayerInputPerformed -= OnRangedWeaponAttackPerformed;
         _playerInputSystem.OnAlternativeAttackPlayerInputPerformed -= OnRangedWeaponAlternativeAttackPerformed;
     }
+
+
 }
