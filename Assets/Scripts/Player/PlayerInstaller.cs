@@ -11,6 +11,7 @@ public class PlayerInstaller : Installer
        BindPlayerRunning();
        BindPlayerSwitchController();
        BindPlayerInventory();
+       BindWeaponControllers();
     }
 
     private void BindPlayerHealth()
@@ -47,5 +48,11 @@ public class PlayerInstaller : Installer
     private void BindPlayerInventory()
     {
         Container.Bind<PlayerInventoryController>().FromComponentInHierarchy().AsSingle().NonLazy();
+    }
+
+    private void BindWeaponControllers()
+    {
+        Container.Bind<RangedWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<MeleeWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

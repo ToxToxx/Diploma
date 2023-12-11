@@ -7,12 +7,18 @@ using static AmmoType;
 public class AmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
 {
     [SerializeField] private AmmoConfig _pistolAmmoConfig;
-    [SerializeField] private RangedWeaponController _rangedWeaponController;
+    private RangedWeaponController _rangedWeaponController;
     public int ItemCount { get; set; }
     public RangedWeaponAmmoType AmmoType { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public Sprite Sprite { get; set; }
+
+    [Inject]
+    public void Construct(RangedWeaponController rangedWeaponController)
+    {
+        _rangedWeaponController = rangedWeaponController;
+    }
 
     private void Awake()
     {
