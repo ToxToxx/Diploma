@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8bf7dc1964110498cef23e3c970c31, type: 3}
+  m_Name: PistolAmmo
+  m_EditorClassIdentifier: 
+  Name: PistolAmmo
+  Description: Use it for Pistols
+  Sprite: {fileID: 21300000, guid: 2797cf66f22b3b848ae0e681796df89d, type: 3}
+  AmmoType: 0

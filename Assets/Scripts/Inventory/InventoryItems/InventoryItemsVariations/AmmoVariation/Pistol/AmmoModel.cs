@@ -4,10 +4,11 @@ using UnityEngine;
 using Zenject;
 using static AmmoType;
 
-public class PistolAmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
+public class AmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
 {
+    [SerializeField] private AmmoConfig _pistolAmmoConfig;
     [SerializeField] private RangedWeaponController _rangedWeaponController;
-    [SerializeField] public int ItemCount { get; set; }
+    public int ItemCount { get; set; }
     public RangedWeaponAmmoType AmmoType { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
@@ -15,7 +16,11 @@ public class PistolAmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
 
     private void Awake()
     {
-        AmmoType = RangedWeaponAmmoType.Pistol;
+        AmmoType = _pistolAmmoConfig.AmmoType;
+        Name = _pistolAmmoConfig.Name;
+        Description = _pistolAmmoConfig.Description;
+        Sprite = _pistolAmmoConfig.Sprite;
+        ItemCount = _pistolAmmoConfig.ItemCount;
     }
     public void UseInventoryItem()
     {
