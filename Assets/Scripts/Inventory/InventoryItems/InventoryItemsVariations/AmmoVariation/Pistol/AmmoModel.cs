@@ -24,19 +24,24 @@ public class AmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
     }
     public void UseInventoryItem()
     {
-        int reloadBulletsAmount;
-        if (_rangedWeaponController.GetRangedWeaponModel().CurrentAmmo <= _rangedWeaponController.GetRangedWeaponModel().MaxAmmo && ItemCount > 0)
+        if(gameObject != null)
         {
-            reloadBulletsAmount = _rangedWeaponController.GetRangedWeaponModel().MaxAmmo - _rangedWeaponController.GetRangedWeaponModel().CurrentAmmo;
-            if (ItemCount  - reloadBulletsAmount > 0)
+            int reloadBulletsAmount;
+            if (_rangedWeaponController.GetRangedWeaponModel().CurrentAmmo <= _rangedWeaponController.GetRangedWeaponModel().MaxAmmo && ItemCount > 0)
             {
-                _rangedWeaponController.ReloadWithAmmo(reloadBulletsAmount);
-                ItemCount -= reloadBulletsAmount;
-            } else
-            {
-                _rangedWeaponController.ReloadWithAmmo(ItemCount);
-                ItemCount = 0;
-            }                  
-        }   
+                reloadBulletsAmount = _rangedWeaponController.GetRangedWeaponModel().MaxAmmo - _rangedWeaponController.GetRangedWeaponModel().CurrentAmmo;
+                if (ItemCount - reloadBulletsAmount > 0)
+                {
+                    _rangedWeaponController.ReloadWithAmmo(reloadBulletsAmount);
+                    ItemCount -= reloadBulletsAmount;
+                }
+                else
+                {
+                    _rangedWeaponController.ReloadWithAmmo(ItemCount);
+                    ItemCount = 0;
+                }
+            }
+            Debug.Log("Reload Complete bullets left in pack: " + ItemCount);
+        }
     }
 }

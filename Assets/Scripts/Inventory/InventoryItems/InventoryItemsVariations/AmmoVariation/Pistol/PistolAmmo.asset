@@ -16,3 +16,4 @@ MonoBehaviour:
   Description: Use it for Pistols
   Sprite: {fileID: 21300000, guid: 2797cf66f22b3b848ae0e681796df89d, type: 3}
   AmmoType: 0
+  ItemCount: 10

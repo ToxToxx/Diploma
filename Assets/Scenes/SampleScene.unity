@@ -1906,7 +1906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f99d9e631a79a42ba323b74aca3259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInventoryCount: 5
+  _playerInventory:
+  - {fileID: 1706285109}
+  _playerInventoryCount: 3
 --- !u!1 &490798178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659823945}
   - component: {fileID: 659823946}
+  - component: {fileID: 659823947}
   m_Layer: 7
   m_Name: RangedWeapon
   m_TagString: Untagged
@@ -3159,6 +3162,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _rangedWeaponTransform: {fileID: 659823945}
+--- !u!114 &659823947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659823944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa57870a91d7a045be7698128d406f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rangedWeaponController: {fileID: 659823946}
 --- !u!1 &705637492
 GameObject:
   m_ObjectHideFlags: 0

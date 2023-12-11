@@ -6,16 +6,10 @@ using Zenject;
 
 public class PlayerInventoryController : MonoBehaviour
 {
-    [SerializeField] private List<IInventoryItem> _playerInventory;
+    [SerializeField] List<GameObject> _playerInventory;
     [SerializeField] private int _playerInventoryCount;
 
-    [Inject]
-    public void Construct()
-    {
-       
-    }
-
-    public void AddItem(IInventoryItem playerInventoryItem)
+    public void AddPlayerItem(GameObject playerInventoryItem)
     {
         if(_playerInventory.Count < _playerInventoryCount)
         {
@@ -23,15 +17,15 @@ public class PlayerInventoryController : MonoBehaviour
         }
     }
 
-    public List<IInventoryItem> GetPlayerInventory()
+    public List<GameObject> GetPlayerInventory()
     {
         return _playerInventory;
     }
 
-    public void UsePlayerInventoryItem(IInventoryItem inventoryItem)
+    public void UsePlayerInventoryItem(GameObject inventoryItem)
     {
-        inventoryItem.UseInventoryItem();
-        if (inventoryItem.ItemCount == 0)
+        inventoryItem.GetComponent<IInventoryItem>().UseInventoryItem();
+        if (inventoryItem.GetComponent<IInventoryItem>().ItemCount == 0)
         {
             _playerInventory.Remove(inventoryItem);
         }

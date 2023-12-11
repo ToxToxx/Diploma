@@ -24,9 +24,15 @@ public class AmmoController : MonoBehaviour
 
     private void FindAmmoAndReload()
     {
-        foreach (IInventoryItem playerInventoryItem in _playerInventoryController.GetPlayerInventory())
+        var playerInventory = _playerInventoryController.GetPlayerInventory();
+        int count = playerInventory.Count;
+
+        for (int i = count - 1; i >= 0; i--)
         {
-            if (playerInventoryItem is IAmmoItem ammoItem && ammoItem.AmmoType == _rangedWeaponConfig.RangedWeaponAmmoType)
+            var playerInventoryItem = playerInventory[i];
+            IAmmoItem ammoItem = playerInventoryItem.gameObject.GetComponent<IAmmoItem>();
+
+            if (ammoItem != null && ammoItem.AmmoType == _rangedWeaponConfig.RangedWeaponAmmoType)
             {
                 _playerInventoryController.UsePlayerInventoryItem(playerInventoryItem);
             }

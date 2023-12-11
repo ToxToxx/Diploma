@@ -99,7 +99,7 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(_rangedWeaponModel.ReloadTime);
         OnReloading?.Invoke(_rangedWeaponConfig);
-        Debug.Log("Reload complete!");
+        
     }
     public void ReloadWithAmmo(int amount)
     {
