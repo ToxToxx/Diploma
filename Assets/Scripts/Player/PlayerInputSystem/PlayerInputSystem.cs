@@ -22,6 +22,7 @@ public class PlayerInputSystem: IDisposable
 
     public event Action<InputAction.CallbackContext> OnAttackPlayerInputPerformed;
     public event Action<InputAction.CallbackContext> OnAlternativeAttackPlayerInputPerformed;
+    public event Action<InputAction.CallbackContext> OnPlayerInputReload;
 
     public event Action<int> OnSwitchItemPerformed;
     public event Action<InputAction.CallbackContext> OnInventoryWindowOpenPerformed;
@@ -44,10 +45,16 @@ public class PlayerInputSystem: IDisposable
 
         _playerInputAction.Player.Attack.performed += OnAttackPerformed;
         _playerInputAction.Player.AlternativeAttack.performed += OnAlternativeAttackPerformed;
+        _playerInputAction.Player.Reload.performed += OnReloadPerformed;
 
         _playerInputAction.Player.SwitchItem.performed += ctx => HandleNumberInput(ctx.control);
         _playerInputAction.Player.OpenInventory.performed += OnOpenInventoryWindowPerformed;
 
+    }
+
+    private void OnReloadPerformed(CallbackContext obj)
+    {
+        OnPlayerInputReload?.Invoke(obj);
     }
 
     private void OnOpenInventoryWindowPerformed(CallbackContext obj)

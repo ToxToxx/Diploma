@@ -28,12 +28,12 @@ public class AmmoInteractableObjectModel : MonoBehaviour,IInterectableObject
         if (IsInteractable && _ammoModel.GetComponent<AmmoModel>())
         {
             _playerInventoryController.AddPlayerItem(_ammoModel);
+            IsInteractable = false;
             Debug.Log("Add ammo");
         }
         else
         {
             Debug.Log(InteractableObjectName + " is not interactable");
-
         }
     }
 }

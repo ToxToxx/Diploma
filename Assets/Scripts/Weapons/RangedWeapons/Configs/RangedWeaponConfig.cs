@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject.SpaceFighter;
+using static InventoryItemType;
 
 [CreateAssetMenu(fileName = "RangedWeaponConfig", menuName = "Configs/WeaponConfig/RangedWeaponConfig")]
 public class RangedWeaponConfig : ScriptableObject
@@ -22,5 +19,5 @@ public class RangedWeaponConfig : ScriptableObject
     public Sprite RangedWeaponIcon;
     public string RangedWeaponDescription;
 
-    public AmmoType.RangedWeaponAmmoType RangedWeaponAmmoType;
+    public ItemType RangedWeaponAmmoType;
 }

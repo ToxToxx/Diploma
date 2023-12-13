@@ -26,6 +26,12 @@ public class RangedWeaponController : MonoBehaviour, IWeaponController
         _switchItemController = switchItemController;
         _playerInputSystem.OnAttackPlayerInputPerformed += OnRangedWeaponAttackPerformed;
         _playerInputSystem.OnAlternativeAttackPlayerInputPerformed += OnRangedWeaponAlternativeAttackPerformed;
+        _playerInputSystem.OnPlayerInputReload += OnReloadPerformed;
+    }
+
+    private void OnReloadPerformed(InputAction.CallbackContext obj)
+    {
+        StartCoroutine(Reload());
     }
 
     private void Awake()

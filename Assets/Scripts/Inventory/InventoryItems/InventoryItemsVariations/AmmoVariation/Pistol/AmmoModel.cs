@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using static AmmoType;
+using static InventoryItemType;
 
-public class AmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
+public class AmmoModel : MonoBehaviour, IInventoryItem
 {
     [SerializeField] private AmmoConfig _pistolAmmoConfig;
     private RangedWeaponController _rangedWeaponController;
+    public ItemType Type { get; set; }
     public int ItemCount { get; set; }
-    public RangedWeaponAmmoType AmmoType { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public Sprite Sprite { get; set; }
+
 
     [Inject]
     public void Construct(RangedWeaponController rangedWeaponController)
@@ -22,7 +23,7 @@ public class AmmoModel : MonoBehaviour, IInventoryItem, IAmmoItem
 
     private void Awake()
     {
-        AmmoType = _pistolAmmoConfig.AmmoType;
+        Type = _pistolAmmoConfig.Type;
         Name = _pistolAmmoConfig.Name;
         Description = _pistolAmmoConfig.Description;
         Sprite = _pistolAmmoConfig.Sprite;

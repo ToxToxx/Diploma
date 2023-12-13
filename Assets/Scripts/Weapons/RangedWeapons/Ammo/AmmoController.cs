@@ -30,9 +30,9 @@ public class AmmoController : MonoBehaviour
         for (int i = count - 1; i >= 0; i--)
         {
             var playerInventoryItem = playerInventory[i];
-            IAmmoItem ammoItem = playerInventoryItem.gameObject.GetComponent<IAmmoItem>();
+            IInventoryItem ammoItem = playerInventoryItem.GetComponent<IInventoryItem>();
 
-            if (ammoItem != null && ammoItem.AmmoType == _rangedWeaponConfig.RangedWeaponAmmoType)
+            if (ammoItem != null && ammoItem.Type == _rangedWeaponConfig.RangedWeaponAmmoType)
             {
                 _playerInventoryController.UsePlayerInventoryItem(playerInventoryItem);
             }
