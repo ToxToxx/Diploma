@@ -11,4 +11,8 @@ public class AmmoConfig : ScriptableObject
     public Sprite Sprite;
     public RangedWeaponAmmoType AmmoType;
     public int ItemCount;
+    private void OnEnable()
+    {
+        ItemCount = Random.Range(3, 20);
+    }
 }

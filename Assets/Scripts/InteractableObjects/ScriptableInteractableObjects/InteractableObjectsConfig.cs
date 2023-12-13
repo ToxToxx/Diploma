@@ -11,5 +11,7 @@ public class InteractableObjectsConfig : ScriptableObject
     public enum TypeOfInteractableObject
     {
         Base,
+        Ammo,
+        Chest,
     }
 }

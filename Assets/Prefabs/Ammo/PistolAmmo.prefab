@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4771174354118780027}
   - component: {fileID: 6392816591798365320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PistolAmmoVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3347281671115361631}
   - component: {fileID: 1033152142053233613}
-  m_Layer: 0
+  - component: {fileID: 104418892941622682}
+  - component: {fileID: 2427425684432412866}
+  - component: {fileID: 1254192903080023383}
+  - component: {fileID: 4395832600380806119}
+  m_Layer: 6
   m_Name: PistolAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,4 +134,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pistolAmmoConfig: {fileID: 11400000, guid: 966e6f40d0e4c2f459af3a116ef80e78, type: 2}
-  _rangedWeaponController: {fileID: 0}
+--- !u!114 &104418892941622682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555802421701055019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd77a8a497527e748ba4c4dfac644595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableObjectModel: {fileID: 3555802421701055019}
+--- !u!50 &2427425684432412866
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555802421701055019}
+  m_BodyType: 0
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1254192903080023383
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555802421701055019}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &4395832600380806119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555802421701055019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af702f7c7a5578f4492d9fa1d4be110a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ammoModel: {fileID: 3555802421701055019}
+  _interactableObjectsConfig: {fileID: 11400000, guid: 2e65fabe566ee8d48ac9ad2f0a0f404b, type: 2}

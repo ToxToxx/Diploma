@@ -744,7 +744,7 @@ Transform:
   m_GameObject: {fileID: 245783291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1935,7 +1935,7 @@ Transform:
   m_GameObject: {fileID: 490798178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4378,6 +4378,7 @@ GameObject:
   - component: {fileID: 1153740463}
   - component: {fileID: 1153740465}
   - component: {fileID: 1153740466}
+  - component: {fileID: 1153740467}
   m_Layer: 6
   m_Name: Radio
   m_TagString: Untagged
@@ -4429,7 +4430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd77a8a497527e748ba4c4dfac644595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactableObjectsConfig: {fileID: 11400000, guid: e08eaf4e3951f1540b530ec39e074ccd, type: 2}
+  _interactableObjectModel: {fileID: 1153740460}
 --- !u!50 &1153740465
 Rigidbody2D:
   serializedVersion: 4
@@ -4502,6 +4503,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.043305, y: 1.2270341}
   m_EdgeRadius: 0
+--- !u!114 &1153740467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153740460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ebf401c17a5a34ba730346779fa0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableObjectsConfig: {fileID: 11400000, guid: e08eaf4e3951f1540b530ec39e074ccd, type: 2}
 --- !u!1 &1229758492
 GameObject:
   m_ObjectHideFlags: 0
@@ -7625,10 +7639,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1033152142053233613, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: _rangedWeaponController
-      value: 
-      objectReference: {fileID: 659823946}
     - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.71
@@ -7639,7 +7649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.04796396
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
       propertyPath: m_LocalRotation.w
