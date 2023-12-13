@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class InteractableObjectView : MonoBehaviour
 {
-    private InteractableObjectController _interactableObjectController;
-
     [SerializeField] private GameObject _descriptionBoxUI;
     [SerializeField] private TextMeshProUGUI _descriptionBoxUIText;
 
@@ -16,12 +14,10 @@ public class InteractableObjectView : MonoBehaviour
 
     private void Awake()
     {
-        _interactableObjectController = GetComponent<InteractableObjectController>();
-        _interactableObjectController.OnInteractionWithObject += OnInteractionWithObject;
         Hide();
     }
 
-    private void OnInteractionWithObject(string descriptionBoxUIText)
+    public void OnInteractionWithObject(string descriptionBoxUIText)
     {
         Show();
 

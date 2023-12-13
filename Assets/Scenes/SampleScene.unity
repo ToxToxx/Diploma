@@ -584,71 +584,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rangedWeaponController: {fileID: 659823946}
   _rangedWeaponImage: {fileID: 1281988519}
---- !u!1001 &121158384
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3347281671115361631, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555802421701055019, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_Name
-      value: PistolAmmo (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4604687997049732611, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_Constraints
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561722939178818759, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
 --- !u!1 &173843805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,6 +3569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795659582}
+  - component: {fileID: 795659583}
   m_Layer: 5
   m_Name: DescriptionBoxUI
   m_TagString: Untagged
@@ -3661,6 +3597,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 160.00003}
   m_SizeDelta: {x: -2088, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &795659583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795659581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5671fe1dd4529f4f9e3a8b7d69626fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _descriptionBoxUI: {fileID: 795659581}
+  _descriptionBoxUIText: {fileID: 1493728757}
+  _displayDuration: 3
+  _baseFontSize: 70
 --- !u!1 &801968312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,7 +4390,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153740461}
-  - component: {fileID: 1153740462}
   - component: {fileID: 1153740463}
   - component: {fileID: 1153740465}
   - component: {fileID: 1153740466}
@@ -4466,22 +4417,6 @@ Transform:
   - {fileID: 581851259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1153740462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153740460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5671fe1dd4529f4f9e3a8b7d69626fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _descriptionBoxUI: {fileID: 795659581}
-  _descriptionBoxUIText: {fileID: 1493728757}
-  _displayDuration: 3
-  _baseFontSize: 70
 --- !u!114 &1153740463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7742,14 +7677,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolAmmo
       objectReference: {fileID: 0}
-    - target: {fileID: 4604687997049732611, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_Constraints
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561722939178818759, guid: d19e0cb5bd9180c41b33d07753813c10, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7773,4 +7700,3 @@ SceneRoots:
   - {fileID: 268949453}
   - {fileID: 3612900822189941084}
   - {fileID: 8627405466577764576}
-  - {fileID: 121158384}

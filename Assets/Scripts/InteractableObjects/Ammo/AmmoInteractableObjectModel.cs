@@ -7,6 +7,7 @@ public class AmmoInteractableObjectModel : MonoBehaviour,IInterectableObject
 {
     [SerializeField]private GameObject _ammoModel;
     [SerializeField] private InteractableObjectsConfig _interactableObjectsConfig;
+    private InteractableObjectView _interactableObjectView;
 
     private PlayerInventoryController _playerInventoryController;
 
@@ -15,12 +16,13 @@ public class AmmoInteractableObjectModel : MonoBehaviour,IInterectableObject
     public string DescriptionBoxText { get; set; }
 
     [Inject]
-    public void Construct(PlayerInventoryController playerInventoryController)
+    public void Construct(PlayerInventoryController playerInventoryController, InteractableObjectView interactableObjectView)
     {
         InteractableObjectName = _interactableObjectsConfig.InteractableObjectName;
         IsInteractable = _interactableObjectsConfig.IsInteractable;
         DescriptionBoxText = _interactableObjectsConfig.DescriptionBoxText;
         _playerInventoryController = playerInventoryController;
+        _interactableObjectView = interactableObjectView;
     }
 
     public void InteractReact()
@@ -29,6 +31,7 @@ public class AmmoInteractableObjectModel : MonoBehaviour,IInterectableObject
         {
             _playerInventoryController.AddPlayerItem(_ammoModel);
             IsInteractable = false;
+            _interactableObjectView.OnInteractionWithObject(DescriptionBoxText);
             Debug.Log("Add ammo");
         }
         else

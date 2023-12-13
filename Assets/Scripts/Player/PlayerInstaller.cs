@@ -12,6 +12,7 @@ public class PlayerInstaller : Installer
        BindPlayerSwitchController();
        BindPlayerInventory();
        BindWeaponControllers();
+       BindInteractableObjectView();
     }
 
     private void BindPlayerHealth()
@@ -54,5 +55,10 @@ public class PlayerInstaller : Installer
     {
         Container.Bind<RangedWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
         Container.Bind<MeleeWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
+    }
+
+    private void BindInteractableObjectView()
+    {
+        Container.Bind<InteractableObjectView>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }
