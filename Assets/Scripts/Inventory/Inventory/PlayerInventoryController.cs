@@ -17,11 +17,6 @@ public class PlayerInventoryController : MonoBehaviour
         }
     }
 
-    public List<GameObject> GetPlayerInventory()
-    {
-        return _playerInventory;
-    }
-
     public void UsePlayerInventoryItem(GameObject inventoryItem)
     {
         inventoryItem.GetComponent<IInventoryItem>().UseInventoryItem();
@@ -29,5 +24,13 @@ public class PlayerInventoryController : MonoBehaviour
         {
             _playerInventory.Remove(inventoryItem);
         }
+    }
+    public int GetPlayerInventoryCount()
+    {
+        return _playerInventoryCount;
+    }
+    public List<GameObject> GetPlayerInventory()
+    {
+        return _playerInventory;
     }
 }

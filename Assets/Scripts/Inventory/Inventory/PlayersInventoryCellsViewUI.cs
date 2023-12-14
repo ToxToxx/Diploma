@@ -8,30 +8,38 @@ public class PlayersInventoryCellsViewUI : MonoBehaviour
     private PlayerInventoryController _playerInventoryController;
     [SerializeField] private GameObject _inventoryCellPrefab;
     [SerializeField] private Transform _cellContainer;
+    private int _requiredCellCount;
+    private int _cellCounter = 0;
 
     [Inject]
     public void Construct(PlayerInventoryController playerInventoryController)
     {
         _playerInventoryController = playerInventoryController;
-        UpdateInventoryView();
     }
 
+    private void Update()
+    {
+        _requiredCellCount = _playerInventoryController.GetPlayerInventoryCount();
+        UpdateInventoryView();
+    }
     private void UpdateInventoryView()
-    { 
-        // Clear existing cells
-        foreach (Transform child in _cellContainer)
+    {
+        if(_cellCounter < _requiredCellCount)
         {
-            Destroy(child.gameObject);
+            for (int i = 0; i < _requiredCellCount; i++)
+            {
+                Instantiate(_inventoryCellPrefab, _cellContainer);
+                _cellCounter++;
+            }
         }
-
-        // Create cells for each item in the player's inventory
-        foreach (GameObject playerInventoryItem in _playerInventoryController.GetPlayerInventory())
+        for (int i = 0; i < _playerInventoryController.GetPlayerInventory().Count; i++)
         {
-            GameObject cell = Instantiate(_inventoryCellPrefab, _cellContainer);
+            GameObject cell = _cellContainer.GetChild(i).gameObject;
             InventoryCellUI cellUI = cell.GetComponent<InventoryCellUI>();
 
-            // Set sprite and item count in the cell
+            GameObject playerInventoryItem = _playerInventoryController.GetPlayerInventory()[i];
             cellUI.SetItem(playerInventoryItem.GetComponent<IInventoryItem>());
         }
+
     }
 }
