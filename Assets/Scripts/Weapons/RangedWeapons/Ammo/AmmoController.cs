@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class AmmoController : MonoBehaviour
+public class AmmoController
 {
     private PlayerInventoryController _playerInventoryController;
-    [SerializeField] private RangedWeaponController _rangedWeaponController;
+    private RangedWeaponController _rangedWeaponController;
     private RangedWeaponConfig _rangedWeaponConfig;
 
     [Inject]
-    public void Construct(PlayerInventoryController playerInventoryController)
+    public void Construct(PlayerInventoryController playerInventoryController, RangedWeaponController rangedWeaponController)
     {
         _playerInventoryController = playerInventoryController;
+        _rangedWeaponController = rangedWeaponController;
         _rangedWeaponController.OnReloading += OnPlayersReloading;
     }
 

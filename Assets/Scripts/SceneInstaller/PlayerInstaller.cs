@@ -54,6 +54,7 @@ public class PlayerInstaller : Installer
     private void BindWeaponControllers()
     {
         Container.Bind<RangedWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<AmmoController>().AsSingle().NonLazy();
         Container.Bind<MeleeWeaponController>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 
