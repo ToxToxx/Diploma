@@ -13,5 +13,6 @@ public class InteractableObjectsConfig : ScriptableObject
         Base,
         Ammo,
         Chest,
+        Radio,
     }
 }
