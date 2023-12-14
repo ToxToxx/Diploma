@@ -8,6 +8,7 @@ public class AmmoController
     private PlayerInventoryController _playerInventoryController;
     private RangedWeaponController _rangedWeaponController;
     private RangedWeaponConfig _rangedWeaponConfig;
+    private bool _isFoundAmmo = false;
 
     [Inject]
     public void Construct(PlayerInventoryController playerInventoryController, RangedWeaponController rangedWeaponController)
@@ -36,7 +37,12 @@ public class AmmoController
             if (ammoItem != null && ammoItem.Type == _rangedWeaponConfig.RangedWeaponAmmoType)
             {
                 _playerInventoryController.UsePlayerInventoryItem(playerInventoryItem);
-            }
+                _isFoundAmmo = true;
+            } 
+        }
+        if (!_isFoundAmmo)
+        {
+            Debug.Log("Нет патронов");
         }
     }
 }

@@ -11,7 +11,7 @@ public class PlayerInventoryController : MonoBehaviour
 
     public void AddPlayerItem(GameObject playerInventoryItem)
     {
-        if(_playerInventory.Count < _playerInventoryCount)
+        if (_playerInventory.Count < _playerInventoryCount)
         {
             _playerInventory.Add(playerInventoryItem);
         }
