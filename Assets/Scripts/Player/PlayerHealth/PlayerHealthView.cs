@@ -37,6 +37,7 @@ public class PlayerHealthView : MonoBehaviour
     private void OnDestroy()
     {
         _healthController.OnHealthDecreased -= UpdateHealthState;
+        _healthController.OnHealthIncreased -= UpdateHealthState;
         _healthController.OnPlayerDeath -= OnPlayerDeath;
     }
 }
