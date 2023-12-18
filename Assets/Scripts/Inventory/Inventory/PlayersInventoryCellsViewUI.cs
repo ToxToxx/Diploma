@@ -24,21 +24,29 @@ public class PlayersInventoryCellsViewUI : MonoBehaviour
     }
     private void UpdateInventoryView()
     {
-        if(_cellCounter < _requiredCellCount)
+        if (_cellCounter < _requiredCellCount)
         {
             for (int i = 0; i < _requiredCellCount; i++)
             {
-                Instantiate(_inventoryCellPrefab, _cellContainer);
+                GameObject cell = Instantiate(_inventoryCellPrefab, _cellContainer);
                 _cellCounter++;
             }
         }
+
         for (int i = 0; i < _playerInventoryController.GetPlayerInventory().Count; i++)
         {
             GameObject cell = _cellContainer.GetChild(i).gameObject;
             InventoryCellUI cellUI = cell.GetComponent<InventoryCellUI>();
 
             GameObject playerInventoryItem = _playerInventoryController.GetPlayerInventory()[i];
-            cellUI.SetItem(playerInventoryItem.GetComponent<IInventoryItem>());
+            if (playerInventoryItem != null)
+            {
+                IInventoryItem inventoryItem = playerInventoryItem.GetComponent<IInventoryItem>();
+                if (inventoryItem != null)
+                {
+                    cellUI.SetItem(inventoryItem);
+                }
+            }
         }
 
     }

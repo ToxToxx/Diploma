@@ -30,16 +30,23 @@ public class RangedWeaponInventoryFirstView : MonoBehaviour
 
     private int GetAmmoCount()
     {
-        _ammoCount = 0; 
+        _ammoCount = 0;
 
         foreach (GameObject playerInventoryItem in _playerInventoryController.GetPlayerInventory())
         {
-            if (_rangedWeaponController.GetRangedWeaponConfig().RangedWeaponAmmoType == playerInventoryItem.GetComponent<IInventoryItem>().Type)
+            IInventoryItem inventoryItem = playerInventoryItem.GetComponent<IInventoryItem>();
+
+            if (inventoryItem is not null and AmmoModel)
             {
-                _ammoCount += playerInventoryItem.GetComponent<IInventoryItem>().ItemCount;
+                AmmoModel ammoModel = (AmmoModel)inventoryItem;
+                if (_rangedWeaponController.GetRangedWeaponConfig().RangedWeaponAmmoType == ammoModel.Type)
+                {
+                    _ammoCount += ammoModel.ItemCount;
+                }
             }
         }
 
         return _ammoCount;
     }
+
 }
