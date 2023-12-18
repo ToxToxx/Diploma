@@ -5,6 +5,8 @@ using Zenject;
 public class PlayerHealthController : ITickable
 {
     public event Action<float> OnHealthDecreased;
+    public event Action<float> OnHealthIncreased;
+
     public event EventHandler OnPlayerDeath;
     private PlayerHealthModel _healthModel;
     private bool _isSecondChance;
@@ -27,7 +29,7 @@ public class PlayerHealthController : ITickable
         if (_healthModel.Health > 0)
         {
             _healthModel.Health -= damageAmount;
-            OnHealthDecreased(_healthModel.Health);
+            OnHealthDecreased?.Invoke(_healthModel.Health);
         }
         else if (_isSecondChance)
         {
@@ -44,8 +46,13 @@ public class PlayerHealthController : ITickable
     {
         return _healthModel.MaxHealth;
     }
-    public PlayerHealthModel GetPlayerHealthModel()
+    public void HealHealth(float amount)
     {
-        return _healthModel;
+        _healthModel.Health += amount;
+        OnHealthIncreased?.Invoke(_healthModel.Health);
+    }
+    public float GetCurrentHealth()
+    {
+        return _healthModel.Health;
     }
 }

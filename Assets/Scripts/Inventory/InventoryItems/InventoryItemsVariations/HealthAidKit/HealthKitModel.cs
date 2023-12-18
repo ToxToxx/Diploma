@@ -32,7 +32,7 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) && ItemCount > 0)
         {
             UseInventoryItem();
         }
@@ -41,12 +41,16 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
     {
         if (gameObject != null)
         {
-            if (_playerHealthController.GetPlayerHealthModel().Health <= _playerHealthController.GetPlayerHealthModel().MaxHealth && ItemCount > 0)
+            if (_playerHealthController.GetCurrentHealth() < _playerHealthController.GetMaxHealth() && ItemCount > 0)
             {
-                _playerHealthController.GetPlayerHealthModel().Health += HealingCount;
+                _playerHealthController.HealHealth(HealingCount);
                 ItemCount--;
+                Debug.Log($"Вы полечились, Осталось {ItemCount} предмета {Name}");
             }
-            Debug.Log($"Healing complete {ItemCount} of {Name} is left");
+            else
+            {
+                Debug.Log("Полное здоровье");
+            }
         }
     }
 

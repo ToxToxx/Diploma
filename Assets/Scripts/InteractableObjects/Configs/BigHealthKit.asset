@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractableObjectName: BigHealthKit
   IsInteractable: 1
-  DescriptionBoxText: You pick up a big health kit
+  DescriptionBoxText: "\u0412\u0437\u044F\u0442\u0430 \u0431\u043E\u043B\u044C\u0448\u0430\u044F
+    \u0430\u043F\u0442\u0435\u0447\u043A\u0430"
   TypeOfObject: 4

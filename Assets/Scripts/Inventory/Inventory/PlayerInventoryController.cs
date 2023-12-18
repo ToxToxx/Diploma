@@ -16,14 +16,13 @@ public class PlayerInventoryController : MonoBehaviour
             _playerInventory.Add(playerInventoryItem);
         }
     }
-
+    private void Update()
+    {
+        RemoveInventoryItem();
+    }
     public void UsePlayerInventoryItem(GameObject inventoryItem)
     {
         inventoryItem.GetComponent<IInventoryItem>().UseInventoryItem();
-        if (inventoryItem.GetComponent<IInventoryItem>().ItemCount == 0)
-        {
-            _playerInventory.Remove(inventoryItem);
-        }
     }
     public int GetPlayerInventoryCount()
     {
@@ -32,5 +31,16 @@ public class PlayerInventoryController : MonoBehaviour
     public List<GameObject> GetPlayerInventory()
     {
         return _playerInventory;
+    }
+
+    public void RemoveInventoryItem()
+    {
+        foreach(var item in _playerInventory)
+        {
+            if (item.GetComponent<IInventoryItem>().ItemCount <= 0)
+            {
+                _playerInventory.Remove(item);
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ public class PlayerHealthView : MonoBehaviour
     {
         _healthController = controller;
         _healthController.OnHealthDecreased += UpdateHealthState;
+        _healthController.OnHealthIncreased += UpdateHealthState;
         _healthController.OnPlayerDeath += OnPlayerDeath;
         _maxHealthPlayer = _healthController.GetMaxHealth();
     }
