@@ -2736,6 +2736,7 @@ GameObject:
   - component: {fileID: 795151478}
   - component: {fileID: 795151482}
   - component: {fileID: 795151481}
+  - component: {fileID: 795151483}
   m_Layer: 0
   m_Name: HealthKit
   m_TagString: Untagged
@@ -2858,6 +2859,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthKitModel: {fileID: 795151477}
   _interactableObjectsConfig: {fileID: 11400000, guid: 4e98c57a906e8b047a4d87dc05192d8a, type: 2}
+--- !u!114 &795151483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795151477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a5dbba27c7d8645b2e583dcb36f2be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthKitConfig: {fileID: 11400000, guid: a24cbb3ebf790eb44a8988178117f8af, type: 2}
 --- !u!1 &795659581
 GameObject:
   m_ObjectHideFlags: 0

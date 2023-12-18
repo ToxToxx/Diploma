@@ -7,6 +7,6 @@ public static class InventoryItemType
    public enum ItemType
     {
         PistolAmmo,
-        Health,
+        HealthKit,
     }
 }

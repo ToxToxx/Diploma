@@ -4,9 +4,9 @@ using UnityEngine;
 using static InventoryItemType;
 using Zenject;
 
-public class HealthAidKitModel : MonoBehaviour
+public class HealthKitModel : MonoBehaviour
 {
-    [SerializeField] private AmmoConfig _healthKitConfig;
+    [SerializeField] private HealthKitConfig _healthKitConfig;
     private PlayerHealthController _playerHealthController;
     public ItemType Type { get; set; }
     public int ItemCount { get; set; }
@@ -28,12 +28,14 @@ public class HealthAidKitModel : MonoBehaviour
         Description = _healthKitConfig.Description;
         Sprite = _healthKitConfig.Sprite;
         ItemCount = _healthKitConfig.ItemCount;
+        HealingCount = _healthKitConfig.HealingCount;
     }
     public void UseInventoryItem()
     {
         if (gameObject != null)
         {
-            if (_playerHealthController.GetPlayerHealthModel().Health <= _playerHealthController.GetPlayerHealthModel().MaxHealth && ItemCount > 0)
+            //if (_playerHealthController.GetPlayerHealthModel().Health <= _playerHealthController.GetPlayerHealthModel().MaxHealth && ItemCount > 0)
+            if(_playerHealthController.GetPlayerHealthModel().Health < HealingCount)
             {
                 _playerHealthController.GetPlayerHealthModel().Health += HealingCount;
                 ItemCount--;

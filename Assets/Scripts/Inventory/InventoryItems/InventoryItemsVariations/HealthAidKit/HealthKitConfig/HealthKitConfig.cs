@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static InventoryItemType;
 
-public class HealthKitConfig : MonoBehaviour
+[CreateAssetMenu(fileName = "HealthKitConfig", menuName = "Configs/InventoryItem/HealthKit")]
+public class HealthKitConfig : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Name;
+    public string Description;
+    public Sprite Sprite;
+    public ItemType Type;
+    public int ItemCount;
+    public int HealingCount;
 }
