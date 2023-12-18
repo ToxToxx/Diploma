@@ -2737,7 +2737,7 @@ GameObject:
   - component: {fileID: 795151482}
   - component: {fileID: 795151481}
   - component: {fileID: 795151483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5882,7 +5882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948381085}
   - component: {fileID: 1948381086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthKitVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
