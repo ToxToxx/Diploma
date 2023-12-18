@@ -14,5 +14,6 @@ public class InteractableObjectsConfig : ScriptableObject
         Ammo,
         Chest,
         Radio,
+        HealthKit,
     }
 }
