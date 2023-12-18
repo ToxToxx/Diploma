@@ -6,49 +6,40 @@ using Zenject;
 
 public class HealthAidKitModel : MonoBehaviour
 {
-    [SerializeField] private AmmoConfig _pistolAmmoConfig;
-    private RangedWeaponController _rangedWeaponController;
+    [SerializeField] private AmmoConfig _healthKitConfig;
+    private PlayerHealthController _playerHealthController;
     public ItemType Type { get; set; }
     public int ItemCount { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public Sprite Sprite { get; set; }
-
+    public int HealingCount { get; set; }
 
     [Inject]
-    public void Construct(RangedWeaponController rangedWeaponController)
+    public void Construct(PlayerHealthController playerHealthController)
     {
-        _rangedWeaponController = rangedWeaponController;
+        _playerHealthController = playerHealthController;
     }
 
     private void Awake()
     {
-        Type = _pistolAmmoConfig.Type;
-        Name = _pistolAmmoConfig.Name;
-        Description = _pistolAmmoConfig.Description;
-        Sprite = _pistolAmmoConfig.Sprite;
-        ItemCount = _pistolAmmoConfig.ItemCount;
+        Type = _healthKitConfig.Type;
+        Name = _healthKitConfig.Name;
+        Description = _healthKitConfig.Description;
+        Sprite = _healthKitConfig.Sprite;
+        ItemCount = _healthKitConfig.ItemCount;
     }
     public void UseInventoryItem()
     {
         if (gameObject != null)
         {
-            int reloadBulletsAmount;
-            if (_rangedWeaponController.GetRangedWeaponModel().CurrentAmmo <= _rangedWeaponController.GetRangedWeaponModel().MaxAmmo && ItemCount > 0)
+            if (_playerHealthController.GetPlayerHealthModel().Health <= _playerHealthController.GetPlayerHealthModel().MaxHealth && ItemCount > 0)
             {
-                reloadBulletsAmount = _rangedWeaponController.GetRangedWeaponModel().MaxAmmo - _rangedWeaponController.GetRangedWeaponModel().CurrentAmmo;
-                if (ItemCount - reloadBulletsAmount > 0)
-                {
-                    _rangedWeaponController.ReloadWithAmmo(reloadBulletsAmount);
-                    ItemCount -= reloadBulletsAmount;
-                }
-                else
-                {
-                    _rangedWeaponController.ReloadWithAmmo(ItemCount);
-                    ItemCount = 0;
-                }
+                _playerHealthController.GetPlayerHealthModel().Health += HealingCount;
+                ItemCount--;
             }
-            Debug.Log("Reload Complete bullets left in pack: " + ItemCount);
+            Debug.Log($"Healing complete {ItemCount} of {Name} is left");
         }
     }
+
 }

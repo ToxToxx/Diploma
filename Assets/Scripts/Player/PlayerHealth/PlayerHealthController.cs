@@ -44,4 +44,8 @@ public class PlayerHealthController : ITickable
     {
         return _healthModel.MaxHealth;
     }
+    public PlayerHealthModel GetPlayerHealthModel()
+    {
+        return _healthModel;
+    }
 }
