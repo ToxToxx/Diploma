@@ -8,6 +8,8 @@ public class InventoryCellUI : MonoBehaviour
 {
     [SerializeField] private Image _itemImage;
     [SerializeField] private TextMeshProUGUI _itemCountText;
+    [SerializeField] private Sprite _defaultImage;
+
 
     public void SetItem(IInventoryItem inventoryItem)
     {
@@ -18,8 +20,8 @@ public class InventoryCellUI : MonoBehaviour
         }
         else
         {
-            _itemImage.sprite = null;
-            _itemCountText.text = string.Empty;
+            _itemImage.sprite = _defaultImage;
+            _itemCountText.text = "0";
         }
     }
 }
