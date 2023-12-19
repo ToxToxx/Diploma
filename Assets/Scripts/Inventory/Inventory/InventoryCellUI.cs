@@ -11,7 +11,15 @@ public class InventoryCellUI : MonoBehaviour
 
     public void SetItem(IInventoryItem inventoryItem)
     {
-        _itemImage.sprite = inventoryItem.Sprite;
-        _itemCountText.text = inventoryItem.ItemCount.ToString();
+        if (inventoryItem != null)
+        {
+            _itemImage.sprite = inventoryItem.Sprite;
+            _itemCountText.text = inventoryItem.ItemCount.ToString();
+        }
+        else
+        {
+            _itemImage.sprite = null;
+            _itemCountText.text = string.Empty;
+        }
     }
 }

@@ -12,7 +12,7 @@ public class PlayerInventoryController : MonoBehaviour
     [SerializeField] List<GameObject> _playerInventory;
     [SerializeField] private int _playerInventoryCount;
 
-    public event EventHandler OnInventoryEmpty;
+    public event EventHandler OnUpdateInventoryCount;
 
     private void Start()
     {
@@ -33,10 +33,11 @@ public class PlayerInventoryController : MonoBehaviour
     private void RemoveItem(GameObject obj)
     {
         _playerInventory.Remove(obj);
-        if (_playerInventory.IsEmpty())
-        {
-            OnInventoryEmpty?.Invoke(this, EventArgs.Empty);
-        }
+    }
+
+    public void ChangeInventoryCount(int count)
+    {
+        _playerInventoryCount = count;
     }
 
     public void UsePlayerInventoryItem(GameObject inventoryItem)
@@ -51,5 +52,6 @@ public class PlayerInventoryController : MonoBehaviour
     {
         return _playerInventory;
     }
+
 
 }
