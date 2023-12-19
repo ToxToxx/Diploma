@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using static InventoryItemType;
 using Zenject;
+using System;
 
 public class HealthKitModel : MonoBehaviour, IInventoryItem
 {
     [SerializeField] private HealthKitConfig _healthKitConfig;
     private PlayerHealthController _playerHealthController;
+    private PlayerInventoryController _playerInventoryController;
+
     public ItemType Type { get; set; }
     public int ItemCount { get; set; }
     public string Name { get; set; }
@@ -15,8 +18,11 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
     public Sprite Sprite { get; set; }
     public int HealingCount { get; set; }
 
+
+    public event Action<GameObject> OnItemCountZero;
+
     [Inject]
-    public void Construct(PlayerHealthController playerHealthController)
+    public void Construct(PlayerHealthController playerHealthController, PlayerInventoryController playerInventoryController)
     {
         _playerHealthController = playerHealthController;
     }
@@ -36,6 +42,7 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
         {
             UseInventoryItem();
         }
+
     }
     public void UseInventoryItem()
     {
@@ -51,7 +58,15 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
             {
                 Debug.Log("Полное здоровье");
             }
+            RemoveItemFromInventory();
         }
     }
 
+    public void RemoveItemFromInventory()
+    {
+        if (ItemCount == 0)
+        {
+            OnItemCountZero?.Invoke(gameObject);
+        }
+    }
 }

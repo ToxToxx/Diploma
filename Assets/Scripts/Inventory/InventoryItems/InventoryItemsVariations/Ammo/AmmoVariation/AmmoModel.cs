@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,21 @@ public class AmmoModel : MonoBehaviour, IInventoryItem
 {
     [SerializeField] private AmmoConfig _pistolAmmoConfig;
     private RangedWeaponController _rangedWeaponController;
+    private PlayerInventoryController _playerInventoryController;
     public ItemType Type { get; set; }
     public int ItemCount { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public Sprite Sprite { get; set; }
 
+    public event Action<GameObject> OnItemCountZero;
+
 
     [Inject]
-    public void Construct(RangedWeaponController rangedWeaponController)
+    public void Construct(RangedWeaponController rangedWeaponController, PlayerInventoryController playerInventoryController)
     {
         _rangedWeaponController = rangedWeaponController;
+        _playerInventoryController = playerInventoryController;
     }
 
     private void Awake()
@@ -45,10 +50,19 @@ public class AmmoModel : MonoBehaviour, IInventoryItem
                 else
                 {
                     _rangedWeaponController.ReloadWithAmmo(ItemCount);
-                    ItemCount = 0;
+                    ItemCount = 0;   
                 }
             }
             Debug.Log("Reload Complete bullets left in pack: " + ItemCount);
+            RemoveItemFromInventory();
+        }
+    }
+
+    public void RemoveItemFromInventory()
+    {
+        if (ItemCount <= 0)
+        {
+            OnItemCountZero?.Invoke(gameObject);
         }
     }
 }
