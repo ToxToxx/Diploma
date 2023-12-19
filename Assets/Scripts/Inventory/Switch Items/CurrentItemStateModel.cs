@@ -11,6 +11,6 @@ public class CurrentItemStateModel
         Secondary,
         FirstUsableItem,
         SecondaryUsableItem,
-        ThirdUsableItem,
+        Inventory,
     }
 }

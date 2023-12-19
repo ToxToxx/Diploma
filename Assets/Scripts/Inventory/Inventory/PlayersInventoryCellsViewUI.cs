@@ -11,6 +11,7 @@ public class PlayersInventoryCellsViewUI : MonoBehaviour
     private int _requiredCellCount;
     private int _cellCounter = 0;
 
+
     [Inject]
     public void Construct(PlayerInventoryController playerInventoryController)
     {

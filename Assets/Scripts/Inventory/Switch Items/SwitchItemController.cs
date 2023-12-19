@@ -5,7 +5,8 @@ using Zenject;
 
 public class SwitchItemController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _weaponControllers; 
+    [SerializeField] private GameObject[] _weaponControllers;
+    [SerializeField] private GameObject _menuWindow;
     private CurrentItemStateModel _currentItemStateModel;
     private PlayerInputSystem _playerInputSystem;
 
@@ -15,7 +16,19 @@ public class SwitchItemController : MonoBehaviour
         _currentItemStateModel = new CurrentItemStateModel();
         _playerInputSystem = playerInputSystem;
         _playerInputSystem.OnSwitchItemPerformed += PlayerInputOnSwitchItemPerformed;
+        _playerInputSystem.OnInventoryWindowOpenPerformed += OnInventoryWindowOpened;
         _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.Primary;
+    }
+
+    private void OnInventoryWindowOpened(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!_menuWindow.activeInHierarchy)
+        {   
+            _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.Inventory;
+        } else
+        {
+            _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.Primary;
+        } 
     }
 
     private void PlayerInputOnSwitchItemPerformed(int obj)
@@ -33,9 +46,6 @@ public class SwitchItemController : MonoBehaviour
                 break;
             case 4:
                 _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.SecondaryUsableItem;
-                break;
-            case 5:
-                _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.ThirdUsableItem;
                 break;
         }
     }
