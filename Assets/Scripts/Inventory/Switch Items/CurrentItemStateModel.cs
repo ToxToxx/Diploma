@@ -9,8 +9,8 @@ public class CurrentItemStateModel
     {
         Primary,
         Secondary,
-        FirstUsableItem,
-        SecondaryUsableItem,
+        UsableItem,
+        NoHands,
         Inventory,
     }
 }

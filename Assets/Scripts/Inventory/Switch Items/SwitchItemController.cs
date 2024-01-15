@@ -42,10 +42,10 @@ public class SwitchItemController : MonoBehaviour
                 _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.Secondary;
                 break;
             case 3:
-                _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.FirstUsableItem;
+                _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.UsableItem;
                 break;
             case 4:
-                _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.SecondaryUsableItem;
+                _currentItemStateModel.CurrentItemType = CurrentItemStateModel.CurrentItemState.NoHands;
                 break;
         }
     }
