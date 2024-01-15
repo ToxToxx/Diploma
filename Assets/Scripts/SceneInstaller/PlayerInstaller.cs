@@ -13,6 +13,7 @@ public class PlayerInstaller : Installer
        BindPlayerInventory();
        BindWeaponControllers();
        BindInteractableObjectView();
+       BindHealthItemController();
     }
 
     private void BindPlayerHealth()
@@ -61,5 +62,10 @@ public class PlayerInstaller : Installer
     private void BindInteractableObjectView()
     {
         Container.Bind<InteractableObjectView>().FromComponentInHierarchy().AsSingle().NonLazy();
+    }
+
+    private void BindHealthItemController()
+    {
+        Container.Bind<HealthItemController>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

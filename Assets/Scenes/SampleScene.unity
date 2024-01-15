@@ -2715,7 +2715,7 @@ GameObject:
   - component: {fileID: 849740694}
   - component: {fileID: 849740695}
   m_Layer: 7
-  m_Name: UsableItemFirst
+  m_Name: HealthItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2746,11 +2746,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 849740693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa16a923243fa8e478268d834e1ccbeb, type: 3}
+  m_Script: {fileID: 11500000, guid: ba4acc7a957b9dd41bf8d3ab30ebd72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryItem: {fileID: 0}
-  _currentItemState: 2
 --- !u!1 &880937598
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,12 +5772,12 @@ GameObject:
   - component: {fileID: 2087089342}
   - component: {fileID: 2087089343}
   m_Layer: 7
-  m_Name: UsableItemVisual
+  m_Name: HealthItemVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2087089342
 Transform:
   m_ObjectHideFlags: 0
@@ -6040,22 +6038,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1630893673360151396, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 222d62d87db5931498bb85845842b0d3, type: 3}
-    - target: {fileID: 1630893673360151396, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1630893673360151396, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1630893673360151396, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3521959638492760549, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.05
@@ -6100,6 +6082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigHealthKit
       objectReference: {fileID: 0}
+    - target: {fileID: 7362726064191920392, guid: 86f72e8f97a6af84db647fa659eff5d1, type: 3}
+      propertyPath: _healthItemController
+      value: 
+      objectReference: {fileID: 849740695}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

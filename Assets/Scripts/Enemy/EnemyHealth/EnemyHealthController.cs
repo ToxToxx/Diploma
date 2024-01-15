@@ -19,14 +19,6 @@ public class EnemyHealthController : MonoBehaviour
         }
         
     }
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            TakeDamage(10);
-        }
-    }
-
     public void TakeDamage(float amount)
     {
         _enemyHealthModel.CurrentHealth -= amount - (amount * _enemyHealthModel.Armor);

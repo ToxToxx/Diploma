@@ -8,6 +8,8 @@ using System;
 public class HealthKitModel : MonoBehaviour, IInventoryItem
 {
     [SerializeField] private HealthKitConfig _healthKitConfig;
+    private HealthItemController _healthItemController;
+
     private PlayerHealthController _playerHealthController;
     private PlayerInventoryController _playerInventoryController;
 
@@ -22,9 +24,19 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
     public event Action<GameObject> OnItemCountZero;
 
     [Inject]
-    public void Construct(PlayerHealthController playerHealthController, PlayerInventoryController playerInventoryController)
+    public void Construct(PlayerHealthController playerHealthController, PlayerInventoryController playerInventoryController, HealthItemController healthItemController)
     {
         _playerHealthController = playerHealthController;
+        _healthItemController = healthItemController;
+        _healthItemController.OnHealthItemUse += _healthItemController_OnHealthItemUse;
+    }
+
+    private void _healthItemController_OnHealthItemUse(object sender, EventArgs e)
+    {
+        if (ItemCount > 0)
+        {
+            UseInventoryItem();
+        }
     }
 
     private void Awake()
@@ -36,14 +48,7 @@ public class HealthKitModel : MonoBehaviour, IInventoryItem
         ItemCount = _healthKitConfig.ItemCount;
         HealingCount = _healthKitConfig.HealingCount;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H) && ItemCount > 0)
-        {
-            UseInventoryItem();
-        }
 
-    }
     public void UseInventoryItem()
     {
         if (gameObject != null)
