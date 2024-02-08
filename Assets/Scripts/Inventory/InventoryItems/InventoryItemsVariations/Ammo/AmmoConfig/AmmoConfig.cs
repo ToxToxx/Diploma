@@ -13,6 +13,6 @@ public class AmmoConfig : ScriptableObject
     public int ItemCount;
     private void OnEnable()
     {
-        ItemCount = Random.Range(3, 20);
+        ItemCount = Random.Range(3, 7);
     }
 }

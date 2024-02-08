@@ -12,7 +12,6 @@ public class PlayerInventoryController : MonoBehaviour
     [SerializeField] List<GameObject> _playerInventory;
     [SerializeField] private int _playerInventoryCount;
 
-    public event EventHandler OnUpdateInventoryCount;
 
     private void Start()
     {
@@ -33,11 +32,6 @@ public class PlayerInventoryController : MonoBehaviour
     private void RemoveItem(GameObject obj)
     {
         _playerInventory.Remove(obj);
-    }
-
-    public void ChangeInventoryCount(int count)
-    {
-        _playerInventoryCount = count;
     }
 
     public void UsePlayerInventoryItem(GameObject inventoryItem)

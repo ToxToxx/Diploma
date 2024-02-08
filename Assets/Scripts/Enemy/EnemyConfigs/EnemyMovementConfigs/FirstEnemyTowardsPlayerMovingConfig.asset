@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e418f975c95ac94c8eafddfd4ecfb40, type: 3}
   m_Name: FirstEnemyTowardsPlayerMovingConfig
   m_EditorClassIdentifier: 
-  EnemySpeed: 2
+  EnemySpeed: 4
