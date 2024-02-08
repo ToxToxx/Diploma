@@ -16,7 +16,6 @@ public class PlayersInventoryCellsViewUI : MonoBehaviour
     public void Construct(PlayerInventoryController playerInventoryController)
     {
         _playerInventoryController = playerInventoryController;
-        _playerInventoryController.OnUpdateInventoryCount += OnUpdateInventoryCount;
     }
 
     private void OnUpdateInventoryCount(object sender, System.EventArgs e)
